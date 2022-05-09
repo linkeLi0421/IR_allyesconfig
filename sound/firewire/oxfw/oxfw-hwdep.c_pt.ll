@@ -1,0 +1,780 @@
+; ModuleID = '/llk/IR_all_yes/sound/firewire/oxfw/oxfw-hwdep.c_pt.bc'
+source_filename = "../sound/firewire/oxfw/oxfw-hwdep.c"
+target datalayout = "E-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "armebv6k-unknown-linux-gnueabi"
+
+module asm ".syntax unified"
+
+%struct.snd_hwdep_ops = type { ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr }
+%struct.snd_card = type { i32, [16 x i8], [16 x i8], [32 x i8], [80 x i8], [32 x i8], [80 x i8], [128 x i8], ptr, ptr, ptr, %struct.list_head, %struct.device, i32, %struct.rw_semaphore, %struct.rwlock_t, i32, i32, %struct.list_head, %struct.list_head, ptr, ptr, %struct.list_head, ptr, %struct.spinlock, i32, ptr, ptr, %struct.device, [4 x ptr], i8, i8, i8, i32, %struct.wait_queue_head, i32, %struct.mutex, ptr, i32, %struct.atomic_t, %struct.wait_queue_head, %struct.wait_queue_head, ptr, i32 }
+%struct.rw_semaphore = type { %struct.atomic_t, %struct.atomic_t, %struct.optimistic_spin_queue, %struct.raw_spinlock, %struct.list_head, ptr, %struct.lockdep_map }
+%struct.optimistic_spin_queue = type { %struct.atomic_t }
+%struct.raw_spinlock = type { %struct.arch_spinlock_t, i32, i32, ptr, %struct.lockdep_map }
+%struct.arch_spinlock_t = type { %union.anon.1 }
+%union.anon.1 = type { i32 }
+%struct.lockdep_map = type { ptr, [2 x ptr], ptr, i8, i8, i8, i32, i32 }
+%struct.rwlock_t = type { %struct.arch_rwlock_t, i32, i32, ptr, %struct.lockdep_map }
+%struct.arch_rwlock_t = type { i32 }
+%struct.list_head = type { ptr, ptr }
+%struct.spinlock = type { %union.anon.0 }
+%union.anon.0 = type { %struct.raw_spinlock }
+%struct.device = type { %struct.kobject, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, %struct.mutex, %struct.mutex, %struct.dev_links_info, %struct.dev_pm_info, ptr, ptr, ptr, %struct.dev_msi_info, ptr, ptr, i64, i64, ptr, ptr, %struct.list_head, ptr, ptr, %struct.dev_archdata, ptr, ptr, i32, i32, %struct.spinlock, %struct.list_head, ptr, ptr, ptr, ptr, ptr, i32, i8 }
+%struct.kobject = type { ptr, %struct.list_head, ptr, ptr, ptr, ptr, %struct.kref, %struct.delayed_work, i8 }
+%struct.kref = type { %struct.refcount_struct }
+%struct.refcount_struct = type { %struct.atomic_t }
+%struct.delayed_work = type { %struct.work_struct, %struct.timer_list, ptr, i32 }
+%struct.work_struct = type { %struct.atomic_t, %struct.list_head, ptr, %struct.lockdep_map }
+%struct.timer_list = type { %struct.hlist_node, i32, ptr, i32, %struct.lockdep_map }
+%struct.hlist_node = type { ptr, ptr }
+%struct.dev_links_info = type { %struct.list_head, %struct.list_head, %struct.list_head, i32 }
+%struct.dev_pm_info = type { %struct.pm_message, i16, i32, %struct.spinlock, %struct.list_head, %struct.completion, ptr, i8, %struct.hrtimer, i64, %struct.work_struct, %struct.wait_queue_head, ptr, %struct.atomic_t, %struct.atomic_t, i16, i32, i32, i32, i32, i32, i32, i64, i64, i64, i64, ptr, ptr, ptr }
+%struct.pm_message = type { i32 }
+%struct.completion = type { i32, %struct.swait_queue_head }
+%struct.swait_queue_head = type { %struct.raw_spinlock, %struct.list_head }
+%struct.hrtimer = type { %struct.timerqueue_node, i64, ptr, ptr, i8, i8, i8, i8 }
+%struct.timerqueue_node = type { %struct.rb_node, i64 }
+%struct.rb_node = type { i32, ptr, ptr }
+%struct.dev_msi_info = type { ptr, ptr }
+%struct.dev_archdata = type { ptr, i8 }
+%struct.mutex = type { %struct.atomic_t, %struct.raw_spinlock, %struct.optimistic_spin_queue, %struct.list_head, ptr, %struct.lockdep_map }
+%struct.atomic_t = type { i32 }
+%struct.wait_queue_head = type { %struct.spinlock, %struct.list_head }
+%struct.snd_hwdep = type { ptr, %struct.list_head, i32, [32 x i8], [80 x i8], i32, i32, i32, %struct.snd_hwdep_ops, %struct.wait_queue_head, ptr, ptr, %struct.device, %struct.mutex, i32, i32, i8 }
+%struct.wait_queue_entry = type { i32, ptr, ptr, %struct.list_head }
+%union.snd_firewire_event = type { %struct.snd_firewire_event_lock_status }
+%struct.snd_firewire_event_lock_status = type { i32, i32 }
+%struct.thread_info = type { i32, i32, ptr, i32, i32, %struct.cpu_context_save, i32, [16 x i8], [2 x i32], %union.fp_state, %union.vfp_state, i32 }
+%struct.cpu_context_save = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [2 x i32] }
+%union.fp_state = type { %struct.iwmmxt_struct }
+%struct.iwmmxt_struct = type { [38 x i32] }
+%union.vfp_state = type { %struct.vfp_hard_struct }
+%struct.vfp_hard_struct = type { [32 x i64], i32, i32, i32, i32, i32 }
+%struct.snd_oxfw = type { ptr, ptr, %struct.mutex, %struct.spinlock, i32, i8, i8, [10 x ptr], [10 x ptr], i8, %struct.cmp_connection, %struct.cmp_connection, %struct.amdtp_stream, %struct.amdtp_stream, i32, i32, i32, i32, i8, %struct.wait_queue_head, ptr, %struct.amdtp_domain }
+%struct.cmp_connection = type { i32, i8, %struct.mutex, %struct.fw_iso_resources, i32, i32, i32, i32 }
+%struct.fw_iso_resources = type { i64, ptr, %struct.mutex, i32, i32, i32, i32, i8 }
+%struct.amdtp_stream = type { ptr, i32, i32, %struct.mutex, ptr, %struct.iso_packets_buffer, i32, i32, ptr, i32, %union.anon.77, i32, i32, i32, i32, i32, i32, i32, i32, ptr, i32, i32, i8, %struct.wait_queue_head, i32, ptr, ptr, i32, i32, %struct.list_head, ptr }
+%struct.iso_packets_buffer = type { %struct.fw_iso_buffer, ptr }
+%struct.fw_iso_buffer = type { i32, ptr, i32, i32 }
+%union.anon.77 = type { %struct.anon.80 }
+%struct.anon.80 = type { i32, i32, %struct.anon.81, i32, i32, i32, ptr, i32 }
+%struct.anon.81 = type { ptr, i32, i32, i32 }
+%struct.amdtp_domain = type { %struct.list_head, i32, i32, ptr, %struct.anon.92, %struct.anon.93 }
+%struct.anon.92 = type { i32, i32, i32 }
+%struct.anon.93 = type { i8 }
+%struct.task_struct = type { i32, ptr, %struct.refcount_struct, i32, i32, i32, %struct.__call_single_node, i32, i32, ptr, i32, i32, i32, i32, i32, i32, i32, [56 x i8], %struct.sched_entity, %struct.sched_rt_entity, %struct.sched_dl_entity, ptr, %struct.rb_node, i32, i32, ptr, [2 x %struct.uclamp_se], [2 x %struct.uclamp_se], [116 x i8], %struct.sched_statistics, i32, i32, i32, ptr, ptr, %struct.cpumask, ptr, i16, i16, i32, i8, i8, i32, %struct.list_head, i32, i32, %union.rcu_special, i8, %struct.list_head, %struct.sched_info, %struct.list_head, %struct.plist_node, %struct.rb_node, ptr, ptr, %struct.vmacache, %struct.task_rss_stat, i32, i32, i32, i32, i32, i32, i8, [3 x i8], i16, i32, %struct.restart_block, i32, i32, i32, ptr, ptr, %struct.list_head, %struct.list_head, ptr, %struct.list_head, %struct.list_head, ptr, [4 x %struct.hlist_node], %struct.list_head, %struct.list_head, ptr, ptr, ptr, ptr, i64, i64, i64, %struct.prev_cputime, i32, i32, i64, i64, i32, i32, %struct.posix_cputimers, ptr, ptr, ptr, ptr, [16 x i8], ptr, %struct.sysv_sem, %struct.sysv_shm, i32, i32, ptr, ptr, ptr, ptr, ptr, ptr, %struct.sigset_t, %struct.sigset_t, %struct.sigset_t, %struct.sigpending, i32, i32, i32, ptr, %struct.kuid_t, i32, %struct.seccomp, %struct.syscall_user_dispatch, i64, i64, %struct.spinlock, %struct.raw_spinlock, %struct.wake_q_node, %struct.rb_root_cached, ptr, ptr, ptr, i32, %struct.irqtrace_events, i32, i64, i32, i32, i32, i64, i32, i32, [48 x %struct.held_lock], i32, ptr, ptr, ptr, ptr, ptr, ptr, ptr, i32, ptr, %struct.task_io_accounting, i32, i64, i64, i64, %struct.nodemask_t, %struct.seqcount_spinlock, i32, i32, ptr, %struct.list_head, ptr, %struct.list_head, ptr, %struct.mutex, i32, [2 x ptr], %struct.mutex, %struct.list_head, ptr, i32, i32, %struct.tlbflush_unmap_batch, %union.anon.53, ptr, %struct.page_frag, ptr, i32, i32, i32, i32, i32, i32, [32 x %struct.latency_record], i64, i64, i32, ptr, i32, i32, i32, i32, ptr, ptr, i64, i32, i32, ptr, i32, i32, i32, ptr, ptr, ptr, i32, i32, %struct.kmap_ctrl, i32, i32, ptr, ptr, ptr, ptr, %struct.llist_head, %struct.thread_struct, [84 x i8] }
+%struct.__call_single_node = type { %struct.llist_node, %union.anon.29 }
+%struct.llist_node = type { ptr }
+%union.anon.29 = type { i32 }
+%struct.sched_entity = type { %struct.load_weight, %struct.rb_node, %struct.list_head, i32, i64, i64, i64, i64, i64, i32, ptr, ptr, ptr, i32, [36 x i8], %struct.sched_avg }
+%struct.load_weight = type { i32, i32 }
+%struct.sched_avg = type { i64, i64, i64, i32, i32, i32, i32, i32, [4 x i8], %struct.util_est, [72 x i8] }
+%struct.util_est = type { i32, i32 }
+%struct.sched_rt_entity = type { %struct.list_head, i32, i32, i32, i16, i16, ptr, ptr, ptr, ptr }
+%struct.sched_dl_entity = type { %struct.rb_node, i64, i64, i64, i64, i64, i64, i64, i32, i8, %struct.hrtimer, %struct.hrtimer, ptr }
+%struct.uclamp_se = type { i16, [2 x i8] }
+%struct.sched_statistics = type { i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64, [24 x i8] }
+%struct.cpumask = type { [1 x i32] }
+%union.rcu_special = type { i32 }
+%struct.sched_info = type { i32, i64, i64, i64 }
+%struct.plist_node = type { i32, %struct.list_head, %struct.list_head }
+%struct.vmacache = type { i64, [4 x ptr] }
+%struct.task_rss_stat = type { i32, [4 x i32] }
+%struct.restart_block = type { i32, ptr, %union.anon.31 }
+%union.anon.31 = type { %struct.anon.32 }
+%struct.anon.32 = type { ptr, i32, i32, i32, i64, ptr }
+%struct.prev_cputime = type { i64, i64, %struct.raw_spinlock }
+%struct.posix_cputimers = type { [3 x %struct.posix_cputimer_base], i32, i32 }
+%struct.posix_cputimer_base = type { i64, %struct.timerqueue_head }
+%struct.timerqueue_head = type { %struct.rb_root_cached }
+%struct.sysv_sem = type { ptr }
+%struct.sysv_shm = type { %struct.list_head }
+%struct.sigset_t = type { [2 x i32] }
+%struct.sigpending = type { %struct.list_head, %struct.sigset_t }
+%struct.kuid_t = type { i32 }
+%struct.seccomp = type { i32, %struct.atomic_t, ptr }
+%struct.syscall_user_dispatch = type {}
+%struct.wake_q_node = type { ptr }
+%struct.rb_root_cached = type { %struct.rb_root, ptr }
+%struct.rb_root = type { ptr }
+%struct.irqtrace_events = type { i32, i32, i32, i32, i32, i32, i32, i32, i32 }
+%struct.held_lock = type { i64, i32, ptr, ptr, i64, i64, i32, i32 }
+%struct.task_io_accounting = type { i64, i64, i64, i64, i64, i64, i64 }
+%struct.nodemask_t = type { [1 x i32] }
+%struct.seqcount_spinlock = type { %struct.seqcount, ptr }
+%struct.seqcount = type { i32, %struct.lockdep_map }
+%struct.tlbflush_unmap_batch = type {}
+%union.anon.53 = type { %struct.callback_head }
+%struct.callback_head = type { ptr, ptr }
+%struct.page_frag = type { ptr, i16, i16 }
+%struct.latency_record = type { [12 x i32], i32, i32, i32 }
+%struct.kmap_ctrl = type { i32, [33 x i32] }
+%struct.llist_head = type { ptr }
+%struct.thread_struct = type { i32, i32, i32, %struct.debug_info }
+%struct.debug_info = type { [32 x ptr] }
+%struct.snd_firewire_get_info = type { i32, i32, [8 x i8], [16 x i8] }
+%struct.fw_card = type { ptr, ptr, %struct.kref, %struct.completion, i32, i32, i32, i64, %struct.list_head, i64, i32, i32, i32, i32, i64, i32, i32, i32, %struct.spinlock, ptr, ptr, ptr, i8, i32, i8, i32, %struct.list_head, %struct.list_head, %struct.delayed_work, i8, %struct.delayed_work, i32, i32, i32, i8, i8, i8, i8, i32, [256 x i32], i32 }
+
+@snd_oxfw_create_hwdep.hwdep_ops = internal constant { %struct.snd_hwdep_ops, [52 x i8] } { %struct.snd_hwdep_ops { ptr null, ptr @hwdep_read, ptr null, ptr null, ptr @hwdep_release, ptr @hwdep_poll, ptr @hwdep_ioctl, ptr null, ptr null, ptr null, ptr null }, [52 x i8] zeroinitializer }, align 32
+@.str = internal constant { [28 x i8], [36 x i8] } { [28 x i8] c"include/linux/thread_info.h\00", [36 x i8] zeroinitializer }, align 32
+@.str.1 = internal constant { [38 x i8], [58 x i8] } { [38 x i8] c"Buffer overflow detected (%d < %lu)!\0A\00", [58 x i8] zeroinitializer }, align 32
+@.str.2 = internal constant { [24 x i8], [40 x i8] } { [24 x i8] c"include/linux/uaccess.h\00", [40 x i8] zeroinitializer }, align 32
+@__sancov_gen_cov_switch_values = internal global [5 x i64] [i64 3, i64 32, i64 18681, i64 18682, i64 2149599480]
+@___asan_gen_.3 = private unnamed_addr constant [10 x i8] c"hwdep_ops\00", align 1
+@___asan_gen_.4 = private constant [36 x i8] c"../sound/firewire/oxfw/oxfw-hwdep.c\00", align 1
+@___asan_gen_.5 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.4, i32 167, i32 36 }
+@___asan_gen_.8 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.10, i32 230, i32 6 }
+@___asan_gen_.10 = private unnamed_addr constant [31 x i8] c"../include/linux/thread_info.h\00", align 1
+@___asan_gen_.11 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.10, i32 214, i32 2 }
+@___asan_gen_.12 = private unnamed_addr constant [17 x i8] c"<string literal>\00", align 1
+@___asan_gen_.13 = private unnamed_addr constant [27 x i8] c"../include/linux/uaccess.h\00", align 1
+@___asan_gen_.14 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.13, i32 174, i32 2 }
+@llvm.compiler.used = appending global [4 x ptr] [ptr @snd_oxfw_create_hwdep.hwdep_ops, ptr @.str, ptr @.str.1, ptr @.str.2], section "llvm.metadata"
+@0 = internal global [4 x { i32, i32, i32, i32, i32, i32, i32, i32 }] [{ i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @snd_oxfw_create_hwdep.hwdep_ops to i32), i32 44, i32 96, i32 ptrtoint (ptr @___asan_gen_.3 to i32), i32 ptrtoint (ptr @___asan_gen_.4 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.5 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str to i32), i32 28, i32 64, i32 ptrtoint (ptr @___asan_gen_.12 to i32), i32 ptrtoint (ptr @___asan_gen_.4 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.8 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.1 to i32), i32 38, i32 96, i32 ptrtoint (ptr @___asan_gen_.12 to i32), i32 ptrtoint (ptr @___asan_gen_.4 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.11 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.2 to i32), i32 24, i32 64, i32 ptrtoint (ptr @___asan_gen_.12 to i32), i32 ptrtoint (ptr @___asan_gen_.4 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.14 to i32), i32 -1 }]
+@llvm.used = appending global [2 x ptr] [ptr @asan.module_ctor, ptr @asan.module_dtor], section "llvm.metadata"
+@llvm.global_ctors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_ctor, ptr null }]
+@llvm.global_dtors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_dtor, ptr null }]
+
+; Function Attrs: nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync)
+define dso_local i32 @snd_oxfw_create_hwdep(ptr noundef %oxfw) local_unnamed_addr #0 align 64 {
+entry:
+  %hwdep = alloca ptr, align 4
+  call void @__sanitizer_cov_trace_pc() #8
+  call void @llvm.arm.gnu.eabi.mcount()
+  call void @llvm.lifetime.start.p0(i64 4, ptr nonnull %hwdep) #6
+  %0 = ptrtoint ptr %hwdep to i32
+  call void @__asan_store4_noabort(i32 %0)
+  store ptr inttoptr (i32 -1 to ptr), ptr %hwdep, align 4, !annotation !19
+  %1 = ptrtoint ptr %oxfw to i32
+  call void @__asan_load4_noabort(i32 %1)
+  %2 = load ptr, ptr %oxfw, align 8
+  %driver = getelementptr inbounds %struct.snd_card, ptr %2, i32 0, i32 2
+  %call = call i32 @snd_hwdep_new(ptr noundef %2, ptr noundef %driver, i32 noundef 0, ptr noundef nonnull %hwdep) #6
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %call)
+  %cmp = icmp slt i32 %call, 0
+  br i1 %cmp, label %entry.end_crit_edge, label %if.end
+
+entry.end_crit_edge:                              ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %end
+
+if.end:                                           ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #8
+  %3 = ptrtoint ptr %hwdep to i32
+  call void @__asan_load4_noabort(i32 %3)
+  %4 = load ptr, ptr %hwdep, align 4
+  %name = getelementptr inbounds %struct.snd_hwdep, ptr %4, i32 0, i32 4
+  %5 = ptrtoint ptr %oxfw to i32
+  call void @__asan_load4_noabort(i32 %5)
+  %6 = load ptr, ptr %oxfw, align 8
+  %driver4 = getelementptr inbounds %struct.snd_card, ptr %6, i32 0, i32 2
+  %call6 = call ptr @strcpy(ptr noundef %name, ptr noundef %driver4) #9
+  %iface = getelementptr inbounds %struct.snd_hwdep, ptr %4, i32 0, i32 5
+  %7 = ptrtoint ptr %iface to i32
+  call void @__asan_store4_noabort(i32 %7)
+  store i32 21, ptr %iface, align 8
+  %ops = getelementptr inbounds %struct.snd_hwdep, ptr %4, i32 0, i32 8
+  %8 = call ptr @memcpy(ptr %ops, ptr @snd_oxfw_create_hwdep.hwdep_ops, i32 44)
+  %private_data = getelementptr inbounds %struct.snd_hwdep, ptr %4, i32 0, i32 10
+  %9 = ptrtoint ptr %private_data to i32
+  call void @__asan_store4_noabort(i32 %9)
+  store ptr %oxfw, ptr %private_data, align 4
+  %exclusive = getelementptr inbounds %struct.snd_hwdep, ptr %4, i32 0, i32 16
+  %10 = ptrtoint ptr %exclusive to i32
+  call void @__asan_load1_noabort(i32 %10)
+  %bf.load = load i8, ptr %exclusive, align 4
+  %bf.set = or i8 %bf.load, -128
+  store i8 %bf.set, ptr %exclusive, align 4
+  br label %end
+
+end:                                              ; preds = %if.end, %entry.end_crit_edge
+  call void @llvm.lifetime.end.p0(i64 4, ptr nonnull %hwdep) #6
+  ret i32 %call
+}
+
+; Function Attrs: nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync)
+define internal i32 @hwdep_read(ptr nocapture noundef readonly %hwdep, ptr noundef %buf, i32 noundef %count, ptr nocapture noundef readnone %offset) #0 align 64 {
+entry:
+  %wait = alloca %struct.wait_queue_entry, align 4
+  %event = alloca %union.snd_firewire_event, align 8
+  call void @__sanitizer_cov_trace_pc() #8
+  call void @llvm.arm.gnu.eabi.mcount()
+  %private_data = getelementptr inbounds %struct.snd_hwdep, ptr %hwdep, i32 0, i32 10
+  %0 = ptrtoint ptr %private_data to i32
+  call void @__asan_load4_noabort(i32 %0)
+  %1 = load ptr, ptr %private_data, align 4
+  call void @llvm.lifetime.start.p0(i64 20, ptr nonnull %wait) #6
+  %2 = getelementptr inbounds %struct.wait_queue_entry, ptr %wait, i32 0, i32 1
+  %3 = getelementptr inbounds %struct.wait_queue_entry, ptr %wait, i32 0, i32 2
+  %4 = getelementptr inbounds %struct.wait_queue_entry, ptr %wait, i32 0, i32 3
+  %5 = getelementptr inbounds %struct.wait_queue_entry, ptr %wait, i32 0, i32 3, i32 1
+  %6 = ptrtoint ptr %wait to i32
+  call void @__asan_store4_noabort(i32 %6)
+  store i32 0, ptr %wait, align 4
+  %7 = tail call i32 @llvm.read_register.i32(metadata !9) #6
+  %and.i = and i32 %7, -16384
+  %8 = inttoptr i32 %and.i to ptr
+  %task = getelementptr inbounds %struct.thread_info, ptr %8, i32 0, i32 2
+  %9 = ptrtoint ptr %task to i32
+  call void @__asan_load4_noabort(i32 %9)
+  %10 = load ptr, ptr %task, align 8
+  %11 = ptrtoint ptr %2 to i32
+  call void @__asan_store4_noabort(i32 %11)
+  store ptr %10, ptr %2, align 4
+  %12 = ptrtoint ptr %3 to i32
+  call void @__asan_store4_noabort(i32 %12)
+  store ptr @autoremove_wake_function, ptr %3, align 4
+  %13 = ptrtoint ptr %4 to i32
+  call void @__asan_store4_noabort(i32 %13)
+  store ptr %4, ptr %4, align 4
+  %14 = ptrtoint ptr %5 to i32
+  call void @__asan_store4_noabort(i32 %14)
+  store ptr %4, ptr %5, align 4
+  call void @llvm.lifetime.start.p0(i64 8, ptr nonnull %event) #6
+  %15 = getelementptr inbounds %struct.snd_firewire_event_lock_status, ptr %event, i32 0, i32 1
+  %lock = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 3
+  call void @_raw_spin_lock_irq(ptr noundef %lock) #6
+  %dev_lock_changed = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 18
+  %16 = ptrtoint ptr %dev_lock_changed to i32
+  call void @__asan_load1_noabort(i32 %16)
+  %17 = load i8, ptr %dev_lock_changed, align 8, !range !20
+  call void @__sanitizer_cov_trace_const_cmp1(i8 0, i8 %17)
+  %tobool.not36 = icmp eq i8 %17, 0
+  br i1 %tobool.not36, label %while.body.lr.ph, label %entry.while.end_crit_edge
+
+entry.while.end_crit_edge:                        ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %while.end
+
+while.body.lr.ph:                                 ; preds = %entry
+  %hwdep_wait = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 19
+  br label %while.body
+
+while.body:                                       ; preds = %if.end.while.body_crit_edge, %while.body.lr.ph
+  call void @prepare_to_wait(ptr noundef %hwdep_wait, ptr noundef nonnull %wait, i32 noundef 1) #6
+  call void @_raw_spin_unlock_irq(ptr noundef %lock) #6
+  call void @schedule() #6
+  call void @finish_wait(ptr noundef %hwdep_wait, ptr noundef nonnull %wait) #6
+  %18 = ptrtoint ptr %task to i32
+  call void @__asan_load4_noabort(i32 %18)
+  %19 = load ptr, ptr %task, align 8
+  %stack.i.i = getelementptr inbounds %struct.task_struct, ptr %19, i32 0, i32 1
+  %20 = ptrtoint ptr %stack.i.i to i32
+  call void @__asan_load4_noabort(i32 %20)
+  %21 = load ptr, ptr %stack.i.i, align 4
+  %22 = ptrtoint ptr %21 to i32
+  call void @__asan_load4_noabort(i32 %22)
+  %23 = load volatile i32, ptr %21, align 4
+  %24 = and i32 %23, 256
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %24)
+  %tobool.not.i = icmp eq i32 %24, 0
+  br i1 %tobool.not.i, label %signal_pending.exit, label %while.body.cleanup_crit_edge, !prof !21
+
+while.body.cleanup_crit_edge:                     ; preds = %while.body
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %cleanup
+
+signal_pending.exit:                              ; preds = %while.body
+  %25 = ptrtoint ptr %21 to i32
+  call void @__asan_load4_noabort(i32 %25)
+  %26 = load volatile i32, ptr %21, align 4
+  %and1.i.i.i.i.i = and i32 %26, 1
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %and1.i.i.i.i.i)
+  %tobool9.not = icmp eq i32 %and1.i.i.i.i.i, 0
+  br i1 %tobool9.not, label %if.end, label %signal_pending.exit.cleanup_crit_edge
+
+signal_pending.exit.cleanup_crit_edge:            ; preds = %signal_pending.exit
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %cleanup
+
+if.end:                                           ; preds = %signal_pending.exit
+  call void @_raw_spin_lock_irq(ptr noundef %lock) #6
+  %27 = ptrtoint ptr %dev_lock_changed to i32
+  call void @__asan_load1_noabort(i32 %27)
+  %28 = load i8, ptr %dev_lock_changed, align 8, !range !20
+  %tobool.not = icmp eq i8 %28, 0
+  br i1 %tobool.not, label %if.end.while.body_crit_edge, label %if.end.while.end_crit_edge
+
+if.end.while.end_crit_edge:                       ; preds = %if.end
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %while.end
+
+if.end.while.body_crit_edge:                      ; preds = %if.end
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %while.body
+
+while.end:                                        ; preds = %if.end.while.end_crit_edge, %entry.while.end_crit_edge
+  %29 = ptrtoint ptr %event to i32
+  call void @__asan_store8_noabort(i32 %29)
+  store i64 18468359372800, ptr %event, align 8
+  %dev_lock_count = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 17
+  %30 = ptrtoint ptr %dev_lock_count to i32
+  call void @__asan_load4_noabort(i32 %30)
+  %31 = load i32, ptr %dev_lock_count, align 4
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %31)
+  %cmp = icmp sgt i32 %31, 0
+  %conv = zext i1 %cmp to i32
+  %32 = ptrtoint ptr %15 to i32
+  call void @__asan_store4_noabort(i32 %32)
+  store i32 %conv, ptr %15, align 4
+  %33 = ptrtoint ptr %dev_lock_changed to i32
+  call void @__asan_store1_noabort(i32 %33)
+  store i8 0, ptr %dev_lock_changed, align 8
+  %34 = call i32 @llvm.smin.i32(i32 %count, i32 8)
+  call void @_raw_spin_unlock_irq(ptr noundef %lock) #6
+  call void @__sanitizer_cov_trace_const_cmp4(i32 8, i32 %34)
+  %cmp1.i.i = icmp ugt i32 %34, 8
+  br i1 %cmp1.i.i, label %if.then3.i.i, label %if.then.i.i.i, !prof !22
+
+if.then3.i.i:                                     ; preds = %while.end
+  call void @__sanitizer_cov_trace_pc() #8
+  call void (ptr, i32, i32, ptr, ...) @warn_slowpath_fmt(ptr noundef nonnull @.str, i32 noundef 214, i32 noundef 9, ptr noundef nonnull @.str.1, i32 noundef 8, i32 noundef %34) #6
+  br label %cleanup
+
+if.then.i.i.i:                                    ; preds = %while.end
+  call void @__check_object_size(ptr noundef nonnull %event, i32 noundef %34, i1 noundef zeroext true) #6
+  call void @__might_fault(ptr noundef nonnull @.str.2, i32 noundef 174) #6
+  %call.i.i = call zeroext i1 @should_fail_usercopy() #6
+  br i1 %call.i.i, label %if.then.i.i.i.copy_to_user.exit_crit_edge, label %if.end.i.i
+
+if.then.i.i.i.copy_to_user.exit_crit_edge:        ; preds = %if.then.i.i.i
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %copy_to_user.exit
+
+if.end.i.i:                                       ; preds = %if.then.i.i.i
+  %35 = call { i32, i32 } asm ".syntax unified\0Aadds $1, $2, $3; sbcscc $1, $1, $0; movcc $0, #0", "=&r,=&r,r,Ir,0,~{cc}"(ptr %buf, i32 %34, i32 -1226833920) #10, !srcloc !23
+  %asmresult.i.i = extractvalue { i32, i32 } %35, 0
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %asmresult.i.i)
+  %cmp.i6.i = icmp eq i32 %asmresult.i.i, 0
+  br i1 %cmp.i6.i, label %if.then2.i.i, label %if.end.i.i.copy_to_user.exit_crit_edge
+
+if.end.i.i.copy_to_user.exit_crit_edge:           ; preds = %if.end.i.i
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %copy_to_user.exit
+
+if.then2.i.i:                                     ; preds = %if.end.i.i
+  call void @__sanitizer_cov_trace_pc() #8
+  %call.i.i.i = call zeroext i1 @__kasan_check_read(ptr noundef nonnull %event, i32 noundef %34) #6
+  %call.i12.i.i = call i32 @arm_copy_to_user(ptr noundef %buf, ptr noundef nonnull %event, i32 noundef %34) #6
+  br label %copy_to_user.exit
+
+copy_to_user.exit:                                ; preds = %if.then2.i.i, %if.end.i.i.copy_to_user.exit_crit_edge, %if.then.i.i.i.copy_to_user.exit_crit_edge
+  %n.addr.0.i = phi i32 [ %34, %if.then.i.i.i.copy_to_user.exit_crit_edge ], [ %call.i12.i.i, %if.then2.i.i ], [ %34, %if.end.i.i.copy_to_user.exit_crit_edge ]
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %n.addr.0.i)
+  %tobool16.not = icmp eq i32 %n.addr.0.i, 0
+  %spec.select = select i1 %tobool16.not, i32 %34, i32 -14
+  br label %cleanup
+
+cleanup:                                          ; preds = %copy_to_user.exit, %if.then3.i.i, %signal_pending.exit.cleanup_crit_edge, %while.body.cleanup_crit_edge
+  %retval.0 = phi i32 [ -14, %if.then3.i.i ], [ %spec.select, %copy_to_user.exit ], [ -512, %signal_pending.exit.cleanup_crit_edge ], [ -512, %while.body.cleanup_crit_edge ]
+  call void @llvm.lifetime.end.p0(i64 8, ptr nonnull %event) #6
+  call void @llvm.lifetime.end.p0(i64 20, ptr nonnull %wait) #6
+  ret i32 %retval.0
+}
+
+; Function Attrs: nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync)
+define internal i32 @hwdep_release(ptr nocapture noundef readonly %hwdep, ptr nocapture noundef readnone %file) #0 align 64 {
+entry:
+  call void @__sanitizer_cov_trace_pc() #8
+  call void @llvm.arm.gnu.eabi.mcount()
+  %private_data = getelementptr inbounds %struct.snd_hwdep, ptr %hwdep, i32 0, i32 10
+  %0 = ptrtoint ptr %private_data to i32
+  call void @__asan_load4_noabort(i32 %0)
+  %1 = load ptr, ptr %private_data, align 4
+  %lock = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 3
+  tail call void @_raw_spin_lock_irq(ptr noundef %lock) #6
+  %dev_lock_count = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 17
+  %2 = ptrtoint ptr %dev_lock_count to i32
+  call void @__asan_load4_noabort(i32 %2)
+  %3 = load i32, ptr %dev_lock_count, align 4
+  call void @__sanitizer_cov_trace_const_cmp4(i32 -1, i32 %3)
+  %cmp = icmp eq i32 %3, -1
+  br i1 %cmp, label %if.then, label %entry.if.end_crit_edge
+
+entry.if.end_crit_edge:                           ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %if.end
+
+if.then:                                          ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #8
+  %4 = ptrtoint ptr %dev_lock_count to i32
+  call void @__asan_store4_noabort(i32 %4)
+  store i32 0, ptr %dev_lock_count, align 4
+  br label %if.end
+
+if.end:                                           ; preds = %if.then, %entry.if.end_crit_edge
+  tail call void @_raw_spin_unlock_irq(ptr noundef %lock) #6
+  ret i32 0
+}
+
+; Function Attrs: nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync)
+define internal i32 @hwdep_poll(ptr nocapture noundef readonly %hwdep, ptr noundef %file, ptr noundef %wait) #0 align 64 {
+entry:
+  call void @__sanitizer_cov_trace_pc() #8
+  call void @llvm.arm.gnu.eabi.mcount()
+  %private_data = getelementptr inbounds %struct.snd_hwdep, ptr %hwdep, i32 0, i32 10
+  %0 = ptrtoint ptr %private_data to i32
+  call void @__asan_load4_noabort(i32 %0)
+  %1 = load ptr, ptr %private_data, align 4
+  %hwdep_wait = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 19
+  %tobool.not.i = icmp eq ptr %wait, null
+  br i1 %tobool.not.i, label %entry.poll_wait.exit_crit_edge, label %land.lhs.true.i
+
+entry.poll_wait.exit_crit_edge:                   ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %poll_wait.exit
+
+land.lhs.true.i:                                  ; preds = %entry
+  %2 = ptrtoint ptr %wait to i32
+  call void @__asan_load4_noabort(i32 %2)
+  %3 = load ptr, ptr %wait, align 4
+  %tobool1.not.i = icmp eq ptr %3, null
+  %tobool3.not.i = icmp eq ptr %hwdep_wait, null
+  %or.cond.i = or i1 %tobool3.not.i, %tobool1.not.i
+  br i1 %or.cond.i, label %land.lhs.true.i.poll_wait.exit_crit_edge, label %if.then.i
+
+land.lhs.true.i.poll_wait.exit_crit_edge:         ; preds = %land.lhs.true.i
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %poll_wait.exit
+
+if.then.i:                                        ; preds = %land.lhs.true.i
+  call void @__sanitizer_cov_trace_pc() #8
+  tail call void %3(ptr noundef %file, ptr noundef nonnull %hwdep_wait, ptr noundef nonnull %wait) #6
+  br label %poll_wait.exit
+
+poll_wait.exit:                                   ; preds = %if.then.i, %land.lhs.true.i.poll_wait.exit_crit_edge, %entry.poll_wait.exit_crit_edge
+  %lock = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 3
+  tail call void @_raw_spin_lock_irq(ptr noundef %lock) #6
+  %dev_lock_changed = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 18
+  %4 = ptrtoint ptr %dev_lock_changed to i32
+  call void @__asan_load1_noabort(i32 %4)
+  %5 = load i8, ptr %dev_lock_changed, align 8, !range !20
+  call void @__sanitizer_cov_trace_const_cmp1(i8 0, i8 %5)
+  %tobool.not = icmp eq i8 %5, 0
+  %. = select i1 %tobool.not, i32 0, i32 65
+  tail call void @_raw_spin_unlock_irq(ptr noundef %lock) #6
+  ret i32 %.
+}
+
+; Function Attrs: nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync)
+define internal i32 @hwdep_ioctl(ptr nocapture noundef readonly %hwdep, ptr nocapture noundef readnone %file, i32 noundef %cmd, i32 noundef %arg) #0 align 64 {
+entry:
+  %info.i = alloca %struct.snd_firewire_get_info, align 4
+  call void @__sanitizer_cov_trace_pc() #8
+  call void @llvm.arm.gnu.eabi.mcount()
+  %private_data = getelementptr inbounds %struct.snd_hwdep, ptr %hwdep, i32 0, i32 10
+  %0 = ptrtoint ptr %private_data to i32
+  call void @__asan_load4_noabort(i32 %0)
+  %1 = load ptr, ptr %private_data, align 4
+  %2 = zext i32 %cmd to i64
+  call void @__sanitizer_cov_trace_switch(i64 %2, ptr @__sancov_gen_cov_switch_values)
+  switch i32 %cmd, label %entry.cleanup_crit_edge [
+    i32 -2145367816, label %sw.bb
+    i32 18681, label %sw.bb1
+    i32 18682, label %sw.bb3
+  ]
+
+entry.cleanup_crit_edge:                          ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %cleanup
+
+sw.bb:                                            ; preds = %entry
+  %3 = inttoptr i32 %arg to ptr
+  %unit.i = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 1
+  %4 = ptrtoint ptr %unit.i to i32
+  call void @__asan_load4_noabort(i32 %4)
+  %5 = load ptr, ptr %unit.i, align 4
+  %parent.i.i = getelementptr inbounds %struct.device, ptr %5, i32 0, i32 1
+  %6 = ptrtoint ptr %parent.i.i to i32
+  call void @__asan_load4_noabort(i32 %6)
+  %7 = load ptr, ptr %parent.i.i, align 8
+  call void @llvm.lifetime.start.p0(i64 32, ptr nonnull %info.i) #6
+  %8 = getelementptr inbounds %struct.snd_firewire_get_info, ptr %info.i, i32 0, i32 1
+  %9 = getelementptr inbounds %struct.snd_firewire_get_info, ptr %info.i, i32 0, i32 2
+  %10 = getelementptr inbounds %struct.snd_firewire_get_info, ptr %info.i, i32 0, i32 2, i32 4
+  %11 = getelementptr inbounds %struct.snd_firewire_get_info, ptr %info.i, i32 0, i32 3
+  %12 = getelementptr inbounds %struct.snd_firewire_get_info, ptr %info.i, i32 0, i32 3
+  %13 = call ptr @memset(ptr %12, i32 0, i32 16)
+  %14 = ptrtoint ptr %info.i to i32
+  call void @__asan_store4_noabort(i32 %14)
+  store i32 4, ptr %info.i, align 4
+  %card.i = getelementptr i8, ptr %7, i32 -4
+  %15 = ptrtoint ptr %card.i to i32
+  call void @__asan_load4_noabort(i32 %15)
+  %16 = load ptr, ptr %card.i, align 4
+  %index.i = getelementptr inbounds %struct.fw_card, ptr %16, i32 0, i32 25
+  %17 = ptrtoint ptr %index.i to i32
+  call void @__asan_load4_noabort(i32 %17)
+  %18 = load i32, ptr %index.i, align 8
+  %19 = ptrtoint ptr %8 to i32
+  call void @__asan_store4_noabort(i32 %19)
+  store i32 %18, ptr %8, align 4
+  %config_rom.i = getelementptr i8, ptr %7, i32 1028
+  %20 = ptrtoint ptr %config_rom.i to i32
+  call void @__asan_load4_noabort(i32 %20)
+  %21 = load ptr, ptr %config_rom.i, align 4
+  %arrayidx.i = getelementptr i32, ptr %21, i32 3
+  %22 = ptrtoint ptr %arrayidx.i to i32
+  call void @__asan_load4_noabort(i32 %22)
+  %23 = load i32, ptr %arrayidx.i, align 4
+  %24 = ptrtoint ptr %9 to i32
+  call void @__asan_store4_noabort(i32 %24)
+  store i32 %23, ptr %9, align 4
+  %arrayidx4.i = getelementptr i32, ptr %21, i32 4
+  %25 = ptrtoint ptr %arrayidx4.i to i32
+  call void @__asan_load4_noabort(i32 %25)
+  %26 = load i32, ptr %arrayidx4.i, align 4
+  %27 = ptrtoint ptr %10 to i32
+  call void @__asan_store4_noabort(i32 %27)
+  store i32 %26, ptr %10, align 4
+  %init_name.i.i = getelementptr inbounds %struct.device, ptr %7, i32 0, i32 3
+  %28 = ptrtoint ptr %init_name.i.i to i32
+  call void @__asan_load4_noabort(i32 %28)
+  %29 = load ptr, ptr %init_name.i.i, align 8
+  %tobool.not.i.i = icmp eq ptr %29, null
+  br i1 %tobool.not.i.i, label %if.end.i.i, label %sw.bb.dev_name.exit.i_crit_edge
+
+sw.bb.dev_name.exit.i_crit_edge:                  ; preds = %sw.bb
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %dev_name.exit.i
+
+if.end.i.i:                                       ; preds = %sw.bb
+  call void @__sanitizer_cov_trace_pc() #8
+  %30 = ptrtoint ptr %7 to i32
+  call void @__asan_load4_noabort(i32 %30)
+  %31 = load ptr, ptr %7, align 4
+  br label %dev_name.exit.i
+
+dev_name.exit.i:                                  ; preds = %if.end.i.i, %sw.bb.dev_name.exit.i_crit_edge
+  %retval.0.i.i = phi ptr [ %31, %if.end.i.i ], [ %29, %sw.bb.dev_name.exit.i_crit_edge ]
+  %call8.i = call i32 @strscpy(ptr noundef %11, ptr noundef %retval.0.i.i, i32 noundef 16) #6
+  call void @__might_fault(ptr noundef nonnull @.str.2, i32 noundef 174) #6
+  %call.i.i.i = call zeroext i1 @should_fail_usercopy() #6
+  br i1 %call.i.i.i, label %dev_name.exit.i.hwdep_get_info.exit_crit_edge, label %if.end.i.i.i
+
+dev_name.exit.i.hwdep_get_info.exit_crit_edge:    ; preds = %dev_name.exit.i
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %hwdep_get_info.exit
+
+if.end.i.i.i:                                     ; preds = %dev_name.exit.i
+  %32 = call { i32, i32 } asm ".syntax unified\0Aadds $1, $2, $3; sbcscc $1, $1, $0; movcc $0, #0", "=&r,=&r,r,Ir,0,~{cc}"(ptr %3, i32 32, i32 -1226833920) #10, !srcloc !23
+  %asmresult.i.i.i = extractvalue { i32, i32 } %32, 0
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %asmresult.i.i.i)
+  %cmp.i6.i.i = icmp eq i32 %asmresult.i.i.i, 0
+  br i1 %cmp.i6.i.i, label %copy_to_user.exit.i, label %if.end.i.i.i.hwdep_get_info.exit_crit_edge
+
+if.end.i.i.i.hwdep_get_info.exit_crit_edge:       ; preds = %if.end.i.i.i
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %hwdep_get_info.exit
+
+copy_to_user.exit.i:                              ; preds = %if.end.i.i.i
+  call void @__sanitizer_cov_trace_pc() #8
+  %call.i.i.i.i = call zeroext i1 @__kasan_check_read(ptr noundef nonnull %info.i, i32 noundef 32) #6
+  %call.i12.i.i.i = call i32 @arm_copy_to_user(ptr noundef %3, ptr noundef nonnull %info.i, i32 noundef 32) #6
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %call.i12.i.i.i)
+  %tobool.not.i = icmp eq i32 %call.i12.i.i.i, 0
+  %spec.select.i = select i1 %tobool.not.i, i32 0, i32 -14
+  br label %hwdep_get_info.exit
+
+hwdep_get_info.exit:                              ; preds = %copy_to_user.exit.i, %if.end.i.i.i.hwdep_get_info.exit_crit_edge, %dev_name.exit.i.hwdep_get_info.exit_crit_edge
+  %33 = phi i32 [ -14, %dev_name.exit.i.hwdep_get_info.exit_crit_edge ], [ -14, %if.end.i.i.i.hwdep_get_info.exit_crit_edge ], [ %spec.select.i, %copy_to_user.exit.i ]
+  call void @llvm.lifetime.end.p0(i64 32, ptr nonnull %info.i) #6
+  br label %cleanup
+
+sw.bb1:                                           ; preds = %entry
+  %lock.i = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 3
+  tail call void @_raw_spin_lock_irq(ptr noundef %lock.i) #6
+  %dev_lock_count.i = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 17
+  %34 = ptrtoint ptr %dev_lock_count.i to i32
+  call void @__asan_load4_noabort(i32 %34)
+  %35 = load i32, ptr %dev_lock_count.i, align 4
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %35)
+  %cmp.i = icmp eq i32 %35, 0
+  br i1 %cmp.i, label %if.then.i, label %sw.bb1.hwdep_lock.exit_crit_edge
+
+sw.bb1.hwdep_lock.exit_crit_edge:                 ; preds = %sw.bb1
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %hwdep_lock.exit
+
+if.then.i:                                        ; preds = %sw.bb1
+  call void @__sanitizer_cov_trace_pc() #8
+  %36 = ptrtoint ptr %dev_lock_count.i to i32
+  call void @__asan_store4_noabort(i32 %36)
+  store i32 -1, ptr %dev_lock_count.i, align 4
+  br label %hwdep_lock.exit
+
+hwdep_lock.exit:                                  ; preds = %if.then.i, %sw.bb1.hwdep_lock.exit_crit_edge
+  %err.0.i = phi i32 [ 0, %if.then.i ], [ -16, %sw.bb1.hwdep_lock.exit_crit_edge ]
+  tail call void @_raw_spin_unlock_irq(ptr noundef %lock.i) #6
+  br label %cleanup
+
+sw.bb3:                                           ; preds = %entry
+  %lock.i7 = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 3
+  tail call void @_raw_spin_lock_irq(ptr noundef %lock.i7) #6
+  %dev_lock_count.i8 = getelementptr inbounds %struct.snd_oxfw, ptr %1, i32 0, i32 17
+  %37 = ptrtoint ptr %dev_lock_count.i8 to i32
+  call void @__asan_load4_noabort(i32 %37)
+  %38 = load i32, ptr %dev_lock_count.i8, align 4
+  call void @__sanitizer_cov_trace_const_cmp4(i32 -1, i32 %38)
+  %cmp.i9 = icmp eq i32 %38, -1
+  br i1 %cmp.i9, label %if.then.i10, label %sw.bb3.hwdep_unlock.exit_crit_edge
+
+sw.bb3.hwdep_unlock.exit_crit_edge:               ; preds = %sw.bb3
+  call void @__sanitizer_cov_trace_pc() #8
+  br label %hwdep_unlock.exit
+
+if.then.i10:                                      ; preds = %sw.bb3
+  call void @__sanitizer_cov_trace_pc() #8
+  %39 = ptrtoint ptr %dev_lock_count.i8 to i32
+  call void @__asan_store4_noabort(i32 %39)
+  store i32 0, ptr %dev_lock_count.i8, align 4
+  br label %hwdep_unlock.exit
+
+hwdep_unlock.exit:                                ; preds = %if.then.i10, %sw.bb3.hwdep_unlock.exit_crit_edge
+  %err.0.i11 = phi i32 [ 0, %if.then.i10 ], [ -77, %sw.bb3.hwdep_unlock.exit_crit_edge ]
+  tail call void @_raw_spin_unlock_irq(ptr noundef %lock.i7) #6
+  br label %cleanup
+
+cleanup:                                          ; preds = %hwdep_unlock.exit, %hwdep_lock.exit, %hwdep_get_info.exit, %entry.cleanup_crit_edge
+  %retval.0 = phi i32 [ %err.0.i11, %hwdep_unlock.exit ], [ %err.0.i, %hwdep_lock.exit ], [ %33, %hwdep_get_info.exit ], [ -515, %entry.cleanup_crit_edge ]
+  ret i32 %retval.0
+}
+
+; Function Attrs: argmemonly nocallback nofree nosync nounwind willreturn
+declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @snd_hwdep_new(ptr noundef, ptr noundef, i32 noundef, ptr noundef) local_unnamed_addr #2
+
+; Function Attrs: argmemonly mustprogress nofree nounwind null_pointer_is_valid willreturn
+declare dso_local ptr @strcpy(ptr noalias noundef returned writeonly, ptr noalias nocapture noundef readonly) local_unnamed_addr #3
+
+; Function Attrs: argmemonly nocallback nofree nosync nounwind willreturn
+declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @autoremove_wake_function(ptr noundef, i32 noundef, i32 noundef, ptr noundef) #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @prepare_to_wait(ptr noundef, ptr noundef, i32 noundef) local_unnamed_addr #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @schedule() local_unnamed_addr #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @finish_wait(ptr noundef, ptr noundef) local_unnamed_addr #2
+
+; Function Attrs: nounwind readonly
+declare i32 @llvm.read_register.i32(metadata) #4
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @_raw_spin_lock_irq(ptr noundef) local_unnamed_addr #2 section ".spinlock.text"
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @_raw_spin_unlock_irq(ptr noundef) local_unnamed_addr #2 section ".spinlock.text"
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @warn_slowpath_fmt(ptr noundef, i32 noundef, i32 noundef, ptr noundef, ...) local_unnamed_addr #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @__check_object_size(ptr noundef, i32 noundef, i1 noundef zeroext) local_unnamed_addr #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @__might_fault(ptr noundef, i32 noundef) local_unnamed_addr #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local zeroext i1 @should_fail_usercopy() local_unnamed_addr #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local zeroext i1 @__kasan_check_read(ptr noundef, i32 noundef) local_unnamed_addr #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @arm_copy_to_user(ptr noundef, ptr noundef, i32 noundef) local_unnamed_addr #2
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @strscpy(ptr noundef, ptr noundef, i32 noundef) local_unnamed_addr #2
+
+; Function Attrs: nocallback nofree nosync nounwind readnone speculatable willreturn
+declare i32 @llvm.smin.i32(i32, i32) #5
+
+; Function Attrs: nounwind
+declare void @llvm.arm.gnu.eabi.mcount() #6
+
+declare void @__sanitizer_cov_trace_const_cmp1(i8 zeroext, i8 zeroext)
+
+declare void @__sanitizer_cov_trace_const_cmp4(i32 zeroext, i32 zeroext)
+
+declare void @__sanitizer_cov_trace_switch(i64, ptr)
+
+declare void @__sanitizer_cov_trace_pc()
+
+declare void @__asan_load1_noabort(i32)
+
+declare void @__asan_load4_noabort(i32)
+
+declare void @__asan_store1_noabort(i32)
+
+declare void @__asan_store4_noabort(i32)
+
+declare void @__asan_store8_noabort(i32)
+
+declare ptr @memcpy(ptr, ptr, i32)
+
+declare ptr @memset(ptr, i32, i32)
+
+declare void @__asan_register_globals(i32, i32)
+
+declare void @__asan_unregister_globals(i32, i32)
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_ctor() #7 {
+  call void @__asan_register_globals(i32 ptrtoint (ptr @0 to i32), i32 4)
+  ret void
+}
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_dtor() #7 {
+  call void @__asan_unregister_globals(i32 ptrtoint (ptr @0 to i32), i32 4)
+  ret void
+}
+
+attributes #0 = { nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync) "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" "warn-stack-size"="1024" }
+attributes #1 = { argmemonly nocallback nofree nosync nounwind willreturn }
+attributes #2 = { null_pointer_is_valid "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #3 = { argmemonly mustprogress nofree nounwind null_pointer_is_valid willreturn "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #4 = { nounwind readonly }
+attributes #5 = { nocallback nofree nosync nounwind readnone speculatable willreturn }
+attributes #6 = { nounwind }
+attributes #7 = { nounwind uwtable(sync) "frame-pointer"="all" }
+attributes #8 = { nomerge }
+attributes #9 = { nobuiltin }
+attributes #10 = { nounwind readnone }
+
+!llvm.asan.globals = !{!0, !2, !4, !5, !7}
+!llvm.named.register.sp = !{!9}
+!llvm.module.flags = !{!10, !11, !12, !13, !14, !15, !16, !17}
+!llvm.ident = !{!18}
+
+!0 = !{ptr @snd_oxfw_create_hwdep.hwdep_ops, !1, !"hwdep_ops", i1 false, i1 false}
+!1 = !{!"../sound/firewire/oxfw/oxfw-hwdep.c", i32 167, i32 36}
+!2 = distinct !{null, !3, !"__already_done", i1 false, i1 false}
+!3 = !{!"../include/linux/thread_info.h", i32 230, i32 6}
+!4 = !{ptr @.str, !3, !"<string literal>", i1 false, i1 false}
+!5 = !{ptr @.str.1, !6, !"<string literal>", i1 false, i1 false}
+!6 = !{!"../include/linux/thread_info.h", i32 214, i32 2}
+!7 = !{ptr @.str.2, !8, !"<string literal>", i1 false, i1 false}
+!8 = !{!"../include/linux/uaccess.h", i32 174, i32 2}
+!9 = !{!"sp"}
+!10 = !{i32 1, !"wchar_size", i32 2}
+!11 = !{i32 1, !"min_enum_size", i32 4}
+!12 = !{i32 8, !"branch-target-enforcement", i32 0}
+!13 = !{i32 8, !"sign-return-address", i32 0}
+!14 = !{i32 8, !"sign-return-address-all", i32 0}
+!15 = !{i32 8, !"sign-return-address-with-bkey", i32 0}
+!16 = !{i32 7, !"uwtable", i32 1}
+!17 = !{i32 7, !"frame-pointer", i32 2}
+!18 = !{!"clang version 15.0.0 (git@github.com:linkeLi0421/llvm-project15-IRDumperPass.git 23ab625cb005cd08da083f9b643a7feed9af8abe)"}
+!19 = !{!"auto-init"}
+!20 = !{i8 0, i8 2}
+!21 = !{!"branch_weights", i32 2000, i32 1}
+!22 = !{!"branch_weights", i32 1, i32 2000}
+!23 = !{i64 2153234541, i64 2153234566}

@@ -1,0 +1,120 @@
+; ModuleID = '/llk/IR_all_yes/drivers/media/rc/keymaps/rc-delock-61959.c_pt.bc'
+source_filename = "../drivers/media/rc/keymaps/rc-delock-61959.c"
+target datalayout = "E-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "armebv6k-unknown-linux-gnueabi"
+
+module asm ".syntax unified"
+
+%struct.rc_map_list = type { %struct.list_head, %struct.rc_map }
+%struct.list_head = type { ptr, ptr }
+%struct.rc_map = type { ptr, i32, i32, i32, i32, ptr, %struct.spinlock }
+%struct.spinlock = type { %union.anon }
+%union.anon = type { %struct.raw_spinlock }
+%struct.raw_spinlock = type { %struct.arch_spinlock_t, i32, i32, ptr, %struct.lockdep_map }
+%struct.arch_spinlock_t = type { %union.anon.0 }
+%union.anon.0 = type { i32 }
+%struct.lockdep_map = type { ptr, [2 x ptr], ptr, i8, i8, i8, i32, i32 }
+%struct.rc_map_table = type { i64, i32 }
+
+@delock_61959_map = internal global { %struct.rc_map_list, [52 x i8] } { %struct.rc_map_list { %struct.list_head zeroinitializer, %struct.rc_map { ptr @delock_61959, i32 32, i32 0, i32 0, i32 10, ptr @.str, %struct.spinlock zeroinitializer } }, [52 x i8] zeroinitializer }, align 32
+@__initcall__kmod_rc_delock_61959__210_74_init_rc_map_delock_619596 = internal global ptr @init_rc_map_delock_61959, section ".initcall6.init", align 4
+@__exitcall_exit_rc_map_delock_61959 = internal global ptr @exit_rc_map_delock_61959, section ".exitcall.exit", align 4
+@__UNIQUE_ID_file211 = internal constant [62 x i8] c"rc_delock_61959.file=drivers/media/rc/keymaps/rc-delock-61959\00", section ".modinfo", align 1
+@__UNIQUE_ID_license212 = internal constant [28 x i8] c"rc_delock_61959.license=GPL\00", section ".modinfo", align 1
+@__UNIQUE_ID_author213 = internal constant [53 x i8] c"rc_delock_61959.author=Jakob Haufe <sur5r@sur5r.net>\00", section ".modinfo", align 1
+@__UNIQUE_ID_description214 = internal constant [57 x i8] c"rc_delock_61959.description=Delock 61959 remote keytable\00", section ".modinfo", align 1
+@delock_61959 = internal global { [32 x %struct.rc_map_table], [128 x i8] } { [32 x %struct.rc_map_table] [%struct.rc_map_table { i64 8809238, i32 356 }, %struct.rc_map_table { i64 8809228, i32 116 }, %struct.rc_map_table { i64 8809216, i32 513 }, %struct.rc_map_table { i64 8809217, i32 514 }, %struct.rc_map_table { i64 8809218, i32 515 }, %struct.rc_map_table { i64 8809219, i32 516 }, %struct.rc_map_table { i64 8809220, i32 517 }, %struct.rc_map_table { i64 8809221, i32 518 }, %struct.rc_map_table { i64 8809222, i32 519 }, %struct.rc_map_table { i64 8809223, i32 520 }, %struct.rc_map_table { i64 8809224, i32 521 }, %struct.rc_map_table { i64 8809236, i32 512 }, %struct.rc_map_table { i64 8809226, i32 372 }, %struct.rc_map_table { i64 8809232, i32 212 }, %struct.rc_map_table { i64 8809230, i32 363 }, %struct.rc_map_table { i64 8809235, i32 1 }, %struct.rc_map_table { i64 8809248, i32 103 }, %struct.rc_map_table { i64 8809249, i32 108 }, %struct.rc_map_table { i64 8809282, i32 105 }, %struct.rc_map_table { i64 8809283, i32 106 }, %struct.rc_map_table { i64 8809227, i32 352 }, %struct.rc_map_table { i64 8809233, i32 402 }, %struct.rc_map_table { i64 8809243, i32 403 }, %struct.rc_map_table { i64 8809234, i32 115 }, %struct.rc_map_table { i64 8809288, i32 114 }, %struct.rc_map_table { i64 8809284, i32 113 }, %struct.rc_map_table { i64 8809242, i32 167 }, %struct.rc_map_table { i64 8809281, i32 207 }, %struct.rc_map_table { i64 8809280, i32 128 }, %struct.rc_map_table { i64 8809241, i32 119 }, %struct.rc_map_table { i64 8809244, i32 208 }, %struct.rc_map_table { i64 8809246, i32 168 }], [128 x i8] zeroinitializer }, align 32
+@.str = internal constant { [16 x i8], [16 x i8] } { [16 x i8] c"rc-delock-61959\00", [16 x i8] zeroinitializer }, align 32
+@___asan_gen_.1 = private unnamed_addr constant [17 x i8] c"delock_61959_map\00", align 1
+@___asan_gen_.3 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.8, i32 55, i32 27 }
+@___asan_gen_.4 = private unnamed_addr constant [13 x i8] c"delock_61959\00", align 1
+@___asan_gen_.6 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.8, i32 13, i32 28 }
+@___asan_gen_.7 = private unnamed_addr constant [17 x i8] c"<string literal>\00", align 1
+@___asan_gen_.8 = private constant [46 x i8] c"../drivers/media/rc/keymaps/rc-delock-61959.c\00", align 1
+@___asan_gen_.9 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.8, i32 60, i32 15 }
+@llvm.compiler.used = appending global [10 x ptr] [ptr @__UNIQUE_ID_author213, ptr @__UNIQUE_ID_description214, ptr @__UNIQUE_ID_file211, ptr @__UNIQUE_ID_license212, ptr @__exitcall_exit_rc_map_delock_61959, ptr @__initcall__kmod_rc_delock_61959__210_74_init_rc_map_delock_619596, ptr @exit_rc_map_delock_61959, ptr @delock_61959_map, ptr @delock_61959, ptr @.str], section "llvm.metadata"
+@0 = internal global [3 x { i32, i32, i32, i32, i32, i32, i32, i32 }] [{ i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @delock_61959_map to i32), i32 76, i32 128, i32 ptrtoint (ptr @___asan_gen_.1 to i32), i32 ptrtoint (ptr @___asan_gen_.8 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.3 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @delock_61959 to i32), i32 512, i32 640, i32 ptrtoint (ptr @___asan_gen_.4 to i32), i32 ptrtoint (ptr @___asan_gen_.8 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.6 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str to i32), i32 16, i32 32, i32 ptrtoint (ptr @___asan_gen_.7 to i32), i32 ptrtoint (ptr @___asan_gen_.8 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.9 to i32), i32 -1 }]
+@llvm.used = appending global [2 x ptr] [ptr @asan.module_ctor, ptr @asan.module_dtor], section "llvm.metadata"
+@llvm.global_ctors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_ctor, ptr null }]
+@llvm.global_dtors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_dtor, ptr null }]
+
+; Function Attrs: cold nounwind null_pointer_is_valid optsize sanitize_address sspstrong uwtable(sync)
+define internal void @exit_rc_map_delock_61959() #0 section ".exit.text" align 64 {
+entry:
+  call void @__sanitizer_cov_trace_pc() #4
+  tail call void @rc_map_unregister(ptr noundef nonnull @delock_61959_map) #2
+  ret void
+}
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @rc_map_unregister(ptr noundef) local_unnamed_addr #1
+
+; Function Attrs: cold nounwind null_pointer_is_valid optsize sanitize_address sspstrong uwtable(sync)
+define internal i32 @init_rc_map_delock_61959() #0 section ".init.text" align 64 {
+entry:
+  call void @__sanitizer_cov_trace_pc() #4
+  call void @llvm.arm.gnu.eabi.mcount()
+  %call = tail call i32 @rc_map_register(ptr noundef nonnull @delock_61959_map) #2
+  ret i32 %call
+}
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @rc_map_register(ptr noundef) local_unnamed_addr #1
+
+; Function Attrs: nounwind
+declare void @llvm.arm.gnu.eabi.mcount() #2
+
+declare void @__sanitizer_cov_trace_pc()
+
+declare void @__asan_register_globals(i32, i32)
+
+declare void @__asan_unregister_globals(i32, i32)
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_ctor() #3 {
+  call void @__asan_register_globals(i32 ptrtoint (ptr @0 to i32), i32 3)
+  ret void
+}
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_dtor() #3 {
+  call void @__asan_unregister_globals(i32 ptrtoint (ptr @0 to i32), i32 3)
+  ret void
+}
+
+attributes #0 = { cold nounwind null_pointer_is_valid optsize sanitize_address sspstrong uwtable(sync) "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" "warn-stack-size"="1024" }
+attributes #1 = { null_pointer_is_valid "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #2 = { nounwind }
+attributes #3 = { nounwind uwtable(sync) "frame-pointer"="all" }
+attributes #4 = { nomerge }
+
+!llvm.asan.globals = !{!0, !2, !4, !6, !7, !9, !11, !13, !15}
+!llvm.module.flags = !{!17, !18, !19, !20, !21, !22, !23, !24}
+!llvm.ident = !{!25}
+
+!0 = !{ptr @__initcall__kmod_rc_delock_61959__210_74_init_rc_map_delock_619596, !1, !"__initcall__kmod_rc_delock_61959__210_74_init_rc_map_delock_619596", i1 false, i1 false}
+!1 = !{!"../drivers/media/rc/keymaps/rc-delock-61959.c", i32 74, i32 1}
+!2 = !{ptr @__exitcall_exit_rc_map_delock_61959, !3, !"__exitcall_exit_rc_map_delock_61959", i1 false, i1 false}
+!3 = !{!"../drivers/media/rc/keymaps/rc-delock-61959.c", i32 75, i32 1}
+!4 = !{ptr @__UNIQUE_ID_file211, !5, !"__UNIQUE_ID_file211", i1 false, i1 false}
+!5 = !{!"../drivers/media/rc/keymaps/rc-delock-61959.c", i32 77, i32 1}
+!6 = !{ptr @__UNIQUE_ID_license212, !5, !"__UNIQUE_ID_license212", i1 false, i1 false}
+!7 = !{ptr @__UNIQUE_ID_author213, !8, !"__UNIQUE_ID_author213", i1 false, i1 false}
+!8 = !{!"../drivers/media/rc/keymaps/rc-delock-61959.c", i32 78, i32 1}
+!9 = !{ptr @__UNIQUE_ID_description214, !10, !"__UNIQUE_ID_description214", i1 false, i1 false}
+!10 = !{!"../drivers/media/rc/keymaps/rc-delock-61959.c", i32 79, i32 1}
+!11 = !{ptr @.str, !12, !"<string literal>", i1 false, i1 false}
+!12 = !{!"../drivers/media/rc/keymaps/rc-delock-61959.c", i32 60, i32 15}
+!13 = !{ptr @delock_61959_map, !14, !"delock_61959_map", i1 false, i1 false}
+!14 = !{!"../drivers/media/rc/keymaps/rc-delock-61959.c", i32 55, i32 27}
+!15 = !{ptr @delock_61959, !16, !"delock_61959", i1 false, i1 false}
+!16 = !{!"../drivers/media/rc/keymaps/rc-delock-61959.c", i32 13, i32 28}
+!17 = !{i32 1, !"wchar_size", i32 2}
+!18 = !{i32 1, !"min_enum_size", i32 4}
+!19 = !{i32 8, !"branch-target-enforcement", i32 0}
+!20 = !{i32 8, !"sign-return-address", i32 0}
+!21 = !{i32 8, !"sign-return-address-all", i32 0}
+!22 = !{i32 8, !"sign-return-address-with-bkey", i32 0}
+!23 = !{i32 7, !"uwtable", i32 1}
+!24 = !{i32 7, !"frame-pointer", i32 2}
+!25 = !{!"clang version 15.0.0 (git@github.com:linkeLi0421/llvm-project15-IRDumperPass.git 23ab625cb005cd08da083f9b643a7feed9af8abe)"}

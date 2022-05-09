@@ -1,0 +1,274 @@
+; ModuleID = '/llk/IR_all_yes/arch/arm/mach-omap2/clockdomains43xx_data.c_pt.bc'
+source_filename = "../arch/arm/mach-omap2/clockdomains43xx_data.c"
+target datalayout = "E-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "armebv6k-unknown-linux-gnueabi"
+
+module asm ".syntax unified"
+
+%struct.clkdm_ops = type { ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr, ptr }
+%struct.clockdomain = type { ptr, %union.anon, i16, i8, i8, i8, i8, i16, i16, ptr, ptr, i32, i32, %struct.list_head, i32 }
+%union.anon = type { ptr }
+%struct.list_head = type { ptr, ptr }
+
+@am43xx_clkdm_operations = external dso_local global %struct.clkdm_ops, align 4
+@clockdomains_am43xx = internal global [19 x ptr] [ptr @l4_cefuse_43xx_clkdm, ptr @mpu_43xx_clkdm, ptr @l4ls_43xx_clkdm, ptr @tamper_43xx_clkdm, ptr @l4_rtc_43xx_clkdm, ptr @pruss_ocp_43xx_clkdm, ptr @ocpwp_l3_43xx_clkdm, ptr @l3s_tsc_43xx_clkdm, ptr @lcdc_43xx_clkdm, ptr @dss_43xx_clkdm, ptr @l3_aon_43xx_clkdm, ptr @emif_43xx_clkdm, ptr @l4_wkup_aon_43xx_clkdm, ptr @l3_43xx_clkdm, ptr @l4_wkup_43xx_clkdm, ptr @cpsw_125mhz_43xx_clkdm, ptr @gfx_l3_43xx_clkdm, ptr @l3s_43xx_clkdm, ptr null], section ".init.data", align 4
+@l4_cefuse_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str, %union.anon { ptr @.str.1 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30976, i16 0, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@mpu_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.2, %union.anon { ptr @.str.3 }, i16 0, i8 15, i8 0, i8 0, i8 1, i16 -32000, i16 0, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@l4ls_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.4, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 1024, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@tamper_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.6, %union.anon { ptr @.str.7 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -31232, i16 0, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@l4_rtc_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.8, %union.anon { ptr @.str.9 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -31488, i16 0, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@pruss_ocp_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.10, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 768, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@ocpwp_l3_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.11, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 3072, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@l3s_tsc_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.12, %union.anon { ptr @.str.13 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 10240, i16 256, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@lcdc_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.14, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 2048, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@dss_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.15, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 2560, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@l3_aon_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.16, %union.anon { ptr @.str.13 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 10240, i16 0, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@emif_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.17, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 1792, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@l4_wkup_aon_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.18, %union.anon { ptr @.str.13 }, i16 0, i8 0, i8 0, i8 0, i8 1, i16 10240, i16 512, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@l3_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.19, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 0, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@l4_wkup_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.20, %union.anon { ptr @.str.13 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 10240, i16 768, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@cpsw_125mhz_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.21, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 2816, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@gfx_l3_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.22, %union.anon { ptr @.str.23 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -31744, i16 0, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@l3s_43xx_clkdm = internal global { %struct.clockdomain, [48 x i8] } { %struct.clockdomain { ptr @.str.24, %union.anon { ptr @.str.5 }, i16 0, i8 3, i8 0, i8 0, i8 1, i16 -30720, i16 512, ptr null, ptr null, i32 0, i32 0, %struct.list_head zeroinitializer, i32 0 }, [48 x i8] zeroinitializer }, align 32
+@.str = internal constant { [16 x i8], [16 x i8] } { [16 x i8] c"l4_cefuse_clkdm\00", [16 x i8] zeroinitializer }, align 32
+@.str.1 = internal constant { [13 x i8], [19 x i8] } { [13 x i8] c"cefuse_pwrdm\00", [19 x i8] zeroinitializer }, align 32
+@.str.2 = internal constant { [10 x i8], [22 x i8] } { [10 x i8] c"mpu_clkdm\00", [22 x i8] zeroinitializer }, align 32
+@.str.3 = internal constant { [10 x i8], [22 x i8] } { [10 x i8] c"mpu_pwrdm\00", [22 x i8] zeroinitializer }, align 32
+@.str.4 = internal constant { [11 x i8], [21 x i8] } { [11 x i8] c"l4ls_clkdm\00", [21 x i8] zeroinitializer }, align 32
+@.str.5 = internal constant { [10 x i8], [22 x i8] } { [10 x i8] c"per_pwrdm\00", [22 x i8] zeroinitializer }, align 32
+@.str.6 = internal constant { [13 x i8], [19 x i8] } { [13 x i8] c"tamper_clkdm\00", [19 x i8] zeroinitializer }, align 32
+@.str.7 = internal constant { [13 x i8], [19 x i8] } { [13 x i8] c"tamper_pwrdm\00", [19 x i8] zeroinitializer }, align 32
+@.str.8 = internal constant { [13 x i8], [19 x i8] } { [13 x i8] c"l4_rtc_clkdm\00", [19 x i8] zeroinitializer }, align 32
+@.str.9 = internal constant { [10 x i8], [22 x i8] } { [10 x i8] c"rtc_pwrdm\00", [22 x i8] zeroinitializer }, align 32
+@.str.10 = internal constant { [16 x i8], [16 x i8] } { [16 x i8] c"pruss_ocp_clkdm\00", [16 x i8] zeroinitializer }, align 32
+@.str.11 = internal constant { [15 x i8], [17 x i8] } { [15 x i8] c"ocpwp_l3_clkdm\00", [17 x i8] zeroinitializer }, align 32
+@.str.12 = internal constant { [14 x i8], [18 x i8] } { [14 x i8] c"l3s_tsc_clkdm\00", [18 x i8] zeroinitializer }, align 32
+@.str.13 = internal constant { [11 x i8], [21 x i8] } { [11 x i8] c"wkup_pwrdm\00", [21 x i8] zeroinitializer }, align 32
+@.str.14 = internal constant { [11 x i8], [21 x i8] } { [11 x i8] c"lcdc_clkdm\00", [21 x i8] zeroinitializer }, align 32
+@.str.15 = internal constant { [10 x i8], [22 x i8] } { [10 x i8] c"dss_clkdm\00", [22 x i8] zeroinitializer }, align 32
+@.str.16 = internal constant { [13 x i8], [19 x i8] } { [13 x i8] c"l3_aon_clkdm\00", [19 x i8] zeroinitializer }, align 32
+@.str.17 = internal constant { [11 x i8], [21 x i8] } { [11 x i8] c"emif_clkdm\00", [21 x i8] zeroinitializer }, align 32
+@.str.18 = internal constant { [18 x i8], [46 x i8] } { [18 x i8] c"l4_wkup_aon_clkdm\00", [46 x i8] zeroinitializer }, align 32
+@.str.19 = internal constant { [9 x i8], [23 x i8] } { [9 x i8] c"l3_clkdm\00", [23 x i8] zeroinitializer }, align 32
+@.str.20 = internal constant { [14 x i8], [18 x i8] } { [14 x i8] c"l4_wkup_clkdm\00", [18 x i8] zeroinitializer }, align 32
+@.str.21 = internal constant { [18 x i8], [46 x i8] } { [18 x i8] c"cpsw_125mhz_clkdm\00", [46 x i8] zeroinitializer }, align 32
+@.str.22 = internal constant { [13 x i8], [19 x i8] } { [13 x i8] c"gfx_l3_clkdm\00", [19 x i8] zeroinitializer }, align 32
+@.str.23 = internal constant { [10 x i8], [22 x i8] } { [10 x i8] c"gfx_pwrdm\00", [22 x i8] zeroinitializer }, align 32
+@.str.24 = internal constant { [10 x i8], [22 x i8] } { [10 x i8] c"l3s_clkdm\00", [22 x i8] zeroinitializer }, align 32
+@___asan_gen_.25 = private unnamed_addr constant [21 x i8] c"l4_cefuse_43xx_clkdm\00", align 1
+@___asan_gen_.27 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 15, i32 27 }
+@___asan_gen_.28 = private unnamed_addr constant [15 x i8] c"mpu_43xx_clkdm\00", align 1
+@___asan_gen_.30 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 24, i32 27 }
+@___asan_gen_.31 = private unnamed_addr constant [16 x i8] c"l4ls_43xx_clkdm\00", align 1
+@___asan_gen_.33 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 33, i32 27 }
+@___asan_gen_.34 = private unnamed_addr constant [18 x i8] c"tamper_43xx_clkdm\00", align 1
+@___asan_gen_.36 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 42, i32 27 }
+@___asan_gen_.37 = private unnamed_addr constant [18 x i8] c"l4_rtc_43xx_clkdm\00", align 1
+@___asan_gen_.39 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 51, i32 27 }
+@___asan_gen_.40 = private unnamed_addr constant [21 x i8] c"pruss_ocp_43xx_clkdm\00", align 1
+@___asan_gen_.42 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 60, i32 27 }
+@___asan_gen_.43 = private unnamed_addr constant [20 x i8] c"ocpwp_l3_43xx_clkdm\00", align 1
+@___asan_gen_.45 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 69, i32 27 }
+@___asan_gen_.46 = private unnamed_addr constant [19 x i8] c"l3s_tsc_43xx_clkdm\00", align 1
+@___asan_gen_.48 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 78, i32 27 }
+@___asan_gen_.49 = private unnamed_addr constant [16 x i8] c"lcdc_43xx_clkdm\00", align 1
+@___asan_gen_.51 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 87, i32 27 }
+@___asan_gen_.52 = private unnamed_addr constant [15 x i8] c"dss_43xx_clkdm\00", align 1
+@___asan_gen_.54 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 96, i32 27 }
+@___asan_gen_.55 = private unnamed_addr constant [18 x i8] c"l3_aon_43xx_clkdm\00", align 1
+@___asan_gen_.57 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 105, i32 27 }
+@___asan_gen_.58 = private unnamed_addr constant [16 x i8] c"emif_43xx_clkdm\00", align 1
+@___asan_gen_.60 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 114, i32 27 }
+@___asan_gen_.61 = private unnamed_addr constant [23 x i8] c"l4_wkup_aon_43xx_clkdm\00", align 1
+@___asan_gen_.63 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 123, i32 27 }
+@___asan_gen_.64 = private unnamed_addr constant [14 x i8] c"l3_43xx_clkdm\00", align 1
+@___asan_gen_.66 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 131, i32 27 }
+@___asan_gen_.67 = private unnamed_addr constant [19 x i8] c"l4_wkup_43xx_clkdm\00", align 1
+@___asan_gen_.69 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 140, i32 27 }
+@___asan_gen_.70 = private unnamed_addr constant [23 x i8] c"cpsw_125mhz_43xx_clkdm\00", align 1
+@___asan_gen_.72 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 149, i32 27 }
+@___asan_gen_.73 = private unnamed_addr constant [18 x i8] c"gfx_l3_43xx_clkdm\00", align 1
+@___asan_gen_.75 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 158, i32 27 }
+@___asan_gen_.76 = private unnamed_addr constant [15 x i8] c"l3s_43xx_clkdm\00", align 1
+@___asan_gen_.78 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 167, i32 27 }
+@___asan_gen_.81 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 16, i32 13 }
+@___asan_gen_.84 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 17, i32 24 }
+@___asan_gen_.87 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 25, i32 13 }
+@___asan_gen_.90 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 26, i32 24 }
+@___asan_gen_.93 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 34, i32 13 }
+@___asan_gen_.96 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 35, i32 24 }
+@___asan_gen_.99 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 43, i32 13 }
+@___asan_gen_.102 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 44, i32 24 }
+@___asan_gen_.105 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 52, i32 13 }
+@___asan_gen_.108 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 53, i32 24 }
+@___asan_gen_.111 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 61, i32 13 }
+@___asan_gen_.114 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 70, i32 13 }
+@___asan_gen_.117 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 79, i32 13 }
+@___asan_gen_.120 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 80, i32 24 }
+@___asan_gen_.123 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 88, i32 13 }
+@___asan_gen_.126 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 97, i32 13 }
+@___asan_gen_.129 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 106, i32 13 }
+@___asan_gen_.132 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 115, i32 13 }
+@___asan_gen_.135 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 124, i32 13 }
+@___asan_gen_.138 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 132, i32 13 }
+@___asan_gen_.141 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 141, i32 13 }
+@___asan_gen_.144 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 150, i32 13 }
+@___asan_gen_.147 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 159, i32 13 }
+@___asan_gen_.150 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 160, i32 24 }
+@___asan_gen_.151 = private unnamed_addr constant [17 x i8] c"<string literal>\00", align 1
+@___asan_gen_.152 = private constant [47 x i8] c"../arch/arm/mach-omap2/clockdomains43xx_data.c\00", align 1
+@___asan_gen_.153 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.152, i32 168, i32 13 }
+@llvm.compiler.used = appending global [43 x ptr] [ptr @l4_cefuse_43xx_clkdm, ptr @mpu_43xx_clkdm, ptr @l4ls_43xx_clkdm, ptr @tamper_43xx_clkdm, ptr @l4_rtc_43xx_clkdm, ptr @pruss_ocp_43xx_clkdm, ptr @ocpwp_l3_43xx_clkdm, ptr @l3s_tsc_43xx_clkdm, ptr @lcdc_43xx_clkdm, ptr @dss_43xx_clkdm, ptr @l3_aon_43xx_clkdm, ptr @emif_43xx_clkdm, ptr @l4_wkup_aon_43xx_clkdm, ptr @l3_43xx_clkdm, ptr @l4_wkup_43xx_clkdm, ptr @cpsw_125mhz_43xx_clkdm, ptr @gfx_l3_43xx_clkdm, ptr @l3s_43xx_clkdm, ptr @.str, ptr @.str.1, ptr @.str.2, ptr @.str.3, ptr @.str.4, ptr @.str.5, ptr @.str.6, ptr @.str.7, ptr @.str.8, ptr @.str.9, ptr @.str.10, ptr @.str.11, ptr @.str.12, ptr @.str.13, ptr @.str.14, ptr @.str.15, ptr @.str.16, ptr @.str.17, ptr @.str.18, ptr @.str.19, ptr @.str.20, ptr @.str.21, ptr @.str.22, ptr @.str.23, ptr @.str.24], section "llvm.metadata"
+@0 = internal global [43 x { i32, i32, i32, i32, i32, i32, i32, i32 }] [{ i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l4_cefuse_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.25 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.27 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @mpu_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.28 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.30 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l4ls_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.31 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.33 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @tamper_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.34 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.36 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l4_rtc_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.37 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.39 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @pruss_ocp_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.42 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @ocpwp_l3_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.43 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l3s_tsc_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.46 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.48 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @lcdc_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.49 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.51 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @dss_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.52 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.54 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l3_aon_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.55 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.57 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @emif_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.58 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.60 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l4_wkup_aon_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.61 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.63 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l3_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.64 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.66 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l4_wkup_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.67 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.69 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @cpsw_125mhz_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.70 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.72 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @gfx_l3_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.73 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.75 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @l3s_43xx_clkdm to i32), i32 48, i32 96, i32 ptrtoint (ptr @___asan_gen_.76 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.78 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str to i32), i32 16, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.81 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.1 to i32), i32 13, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.84 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.2 to i32), i32 10, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.87 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.3 to i32), i32 10, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.90 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.4 to i32), i32 11, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.93 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.5 to i32), i32 10, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.96 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.6 to i32), i32 13, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.99 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.7 to i32), i32 13, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.102 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.8 to i32), i32 13, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.105 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.9 to i32), i32 10, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.108 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.10 to i32), i32 16, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.111 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.11 to i32), i32 15, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.114 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.12 to i32), i32 14, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.117 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.13 to i32), i32 11, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.120 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.14 to i32), i32 11, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.123 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.15 to i32), i32 10, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.126 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.16 to i32), i32 13, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.129 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.17 to i32), i32 11, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.132 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.18 to i32), i32 18, i32 64, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.135 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.19 to i32), i32 9, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.138 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.20 to i32), i32 14, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.141 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.21 to i32), i32 18, i32 64, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.144 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.22 to i32), i32 13, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.147 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.23 to i32), i32 10, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.150 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.24 to i32), i32 10, i32 32, i32 ptrtoint (ptr @___asan_gen_.151 to i32), i32 ptrtoint (ptr @___asan_gen_.152 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.153 to i32), i32 -1 }]
+@llvm.used = appending global [2 x ptr] [ptr @asan.module_ctor, ptr @asan.module_dtor], section "llvm.metadata"
+@llvm.global_ctors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_ctor, ptr null }]
+@llvm.global_dtors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_dtor, ptr null }]
+
+; Function Attrs: cold nounwind null_pointer_is_valid optsize sanitize_address sspstrong uwtable(sync)
+define dso_local void @am43xx_clockdomains_init() local_unnamed_addr #0 section ".init.text" align 64 {
+entry:
+  call void @__sanitizer_cov_trace_pc() #4
+  call void @llvm.arm.gnu.eabi.mcount()
+  %call = tail call i32 @clkdm_register_platform_funcs(ptr noundef nonnull @am43xx_clkdm_operations) #2
+  %call1 = tail call i32 @clkdm_register_clkdms(ptr noundef nonnull @clockdomains_am43xx) #2
+  %call2 = tail call i32 @clkdm_complete_init() #2
+  ret void
+}
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @clkdm_register_platform_funcs(ptr noundef) local_unnamed_addr #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @clkdm_register_clkdms(ptr noundef) local_unnamed_addr #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @clkdm_complete_init() local_unnamed_addr #1
+
+; Function Attrs: nounwind
+declare void @llvm.arm.gnu.eabi.mcount() #2
+
+declare void @__sanitizer_cov_trace_pc()
+
+declare void @__asan_register_globals(i32, i32)
+
+declare void @__asan_unregister_globals(i32, i32)
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_ctor() #3 {
+  call void @__asan_register_globals(i32 ptrtoint (ptr @0 to i32), i32 43)
+  ret void
+}
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_dtor() #3 {
+  call void @__asan_unregister_globals(i32 ptrtoint (ptr @0 to i32), i32 43)
+  ret void
+}
+
+attributes #0 = { cold nounwind null_pointer_is_valid optsize sanitize_address sspstrong uwtable(sync) "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" "warn-stack-size"="1024" }
+attributes #1 = { null_pointer_is_valid "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #2 = { nounwind }
+attributes #3 = { nounwind uwtable(sync) "frame-pointer"="all" }
+attributes #4 = { nomerge }
+
+!llvm.asan.globals = !{!0, !2, !4, !6, !8, !10, !12, !14, !16, !18, !20, !22, !24, !26, !28, !30, !32, !34, !36, !38, !40, !42, !44, !46, !48, !50, !52, !54, !56, !58, !60, !62, !64, !66, !68, !70, !72, !74, !76, !78, !80, !82, !84, !86}
+!llvm.module.flags = !{!88, !89, !90, !91, !92, !93, !94, !95}
+!llvm.ident = !{!96}
+
+!0 = !{ptr @clockdomains_am43xx, !1, !"clockdomains_am43xx", i1 false, i1 false}
+!1 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 176, i32 28}
+!2 = !{ptr @.str, !3, !"<string literal>", i1 false, i1 false}
+!3 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 16, i32 13}
+!4 = !{ptr @.str.1, !5, !"<string literal>", i1 false, i1 false}
+!5 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 17, i32 24}
+!6 = !{ptr @l4_cefuse_43xx_clkdm, !7, !"l4_cefuse_43xx_clkdm", i1 false, i1 false}
+!7 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 15, i32 27}
+!8 = !{ptr @.str.2, !9, !"<string literal>", i1 false, i1 false}
+!9 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 25, i32 13}
+!10 = !{ptr @.str.3, !11, !"<string literal>", i1 false, i1 false}
+!11 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 26, i32 24}
+!12 = !{ptr @mpu_43xx_clkdm, !13, !"mpu_43xx_clkdm", i1 false, i1 false}
+!13 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 24, i32 27}
+!14 = !{ptr @.str.4, !15, !"<string literal>", i1 false, i1 false}
+!15 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 34, i32 13}
+!16 = !{ptr @.str.5, !17, !"<string literal>", i1 false, i1 false}
+!17 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 35, i32 24}
+!18 = !{ptr @l4ls_43xx_clkdm, !19, !"l4ls_43xx_clkdm", i1 false, i1 false}
+!19 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 33, i32 27}
+!20 = !{ptr @.str.6, !21, !"<string literal>", i1 false, i1 false}
+!21 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 43, i32 13}
+!22 = !{ptr @.str.7, !23, !"<string literal>", i1 false, i1 false}
+!23 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 44, i32 24}
+!24 = !{ptr @tamper_43xx_clkdm, !25, !"tamper_43xx_clkdm", i1 false, i1 false}
+!25 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 42, i32 27}
+!26 = !{ptr @.str.8, !27, !"<string literal>", i1 false, i1 false}
+!27 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 52, i32 13}
+!28 = !{ptr @.str.9, !29, !"<string literal>", i1 false, i1 false}
+!29 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 53, i32 24}
+!30 = !{ptr @l4_rtc_43xx_clkdm, !31, !"l4_rtc_43xx_clkdm", i1 false, i1 false}
+!31 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 51, i32 27}
+!32 = !{ptr @.str.10, !33, !"<string literal>", i1 false, i1 false}
+!33 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 61, i32 13}
+!34 = !{ptr @pruss_ocp_43xx_clkdm, !35, !"pruss_ocp_43xx_clkdm", i1 false, i1 false}
+!35 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 60, i32 27}
+!36 = !{ptr @.str.11, !37, !"<string literal>", i1 false, i1 false}
+!37 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 70, i32 13}
+!38 = !{ptr @ocpwp_l3_43xx_clkdm, !39, !"ocpwp_l3_43xx_clkdm", i1 false, i1 false}
+!39 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 69, i32 27}
+!40 = !{ptr @.str.12, !41, !"<string literal>", i1 false, i1 false}
+!41 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 79, i32 13}
+!42 = !{ptr @.str.13, !43, !"<string literal>", i1 false, i1 false}
+!43 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 80, i32 24}
+!44 = !{ptr @l3s_tsc_43xx_clkdm, !45, !"l3s_tsc_43xx_clkdm", i1 false, i1 false}
+!45 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 78, i32 27}
+!46 = !{ptr @.str.14, !47, !"<string literal>", i1 false, i1 false}
+!47 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 88, i32 13}
+!48 = !{ptr @lcdc_43xx_clkdm, !49, !"lcdc_43xx_clkdm", i1 false, i1 false}
+!49 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 87, i32 27}
+!50 = !{ptr @.str.15, !51, !"<string literal>", i1 false, i1 false}
+!51 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 97, i32 13}
+!52 = !{ptr @dss_43xx_clkdm, !53, !"dss_43xx_clkdm", i1 false, i1 false}
+!53 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 96, i32 27}
+!54 = !{ptr @.str.16, !55, !"<string literal>", i1 false, i1 false}
+!55 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 106, i32 13}
+!56 = !{ptr @l3_aon_43xx_clkdm, !57, !"l3_aon_43xx_clkdm", i1 false, i1 false}
+!57 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 105, i32 27}
+!58 = !{ptr @.str.17, !59, !"<string literal>", i1 false, i1 false}
+!59 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 115, i32 13}
+!60 = !{ptr @emif_43xx_clkdm, !61, !"emif_43xx_clkdm", i1 false, i1 false}
+!61 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 114, i32 27}
+!62 = !{ptr @.str.18, !63, !"<string literal>", i1 false, i1 false}
+!63 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 124, i32 13}
+!64 = !{ptr @l4_wkup_aon_43xx_clkdm, !65, !"l4_wkup_aon_43xx_clkdm", i1 false, i1 false}
+!65 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 123, i32 27}
+!66 = !{ptr @.str.19, !67, !"<string literal>", i1 false, i1 false}
+!67 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 132, i32 13}
+!68 = !{ptr @l3_43xx_clkdm, !69, !"l3_43xx_clkdm", i1 false, i1 false}
+!69 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 131, i32 27}
+!70 = !{ptr @.str.20, !71, !"<string literal>", i1 false, i1 false}
+!71 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 141, i32 13}
+!72 = !{ptr @l4_wkup_43xx_clkdm, !73, !"l4_wkup_43xx_clkdm", i1 false, i1 false}
+!73 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 140, i32 27}
+!74 = !{ptr @.str.21, !75, !"<string literal>", i1 false, i1 false}
+!75 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 150, i32 13}
+!76 = !{ptr @cpsw_125mhz_43xx_clkdm, !77, !"cpsw_125mhz_43xx_clkdm", i1 false, i1 false}
+!77 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 149, i32 27}
+!78 = !{ptr @.str.22, !79, !"<string literal>", i1 false, i1 false}
+!79 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 159, i32 13}
+!80 = !{ptr @.str.23, !81, !"<string literal>", i1 false, i1 false}
+!81 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 160, i32 24}
+!82 = !{ptr @gfx_l3_43xx_clkdm, !83, !"gfx_l3_43xx_clkdm", i1 false, i1 false}
+!83 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 158, i32 27}
+!84 = !{ptr @.str.24, !85, !"<string literal>", i1 false, i1 false}
+!85 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 168, i32 13}
+!86 = !{ptr @l3s_43xx_clkdm, !87, !"l3s_43xx_clkdm", i1 false, i1 false}
+!87 = !{!"../arch/arm/mach-omap2/clockdomains43xx_data.c", i32 167, i32 27}
+!88 = !{i32 1, !"wchar_size", i32 2}
+!89 = !{i32 1, !"min_enum_size", i32 4}
+!90 = !{i32 8, !"branch-target-enforcement", i32 0}
+!91 = !{i32 8, !"sign-return-address", i32 0}
+!92 = !{i32 8, !"sign-return-address-all", i32 0}
+!93 = !{i32 8, !"sign-return-address-with-bkey", i32 0}
+!94 = !{i32 7, !"uwtable", i32 1}
+!95 = !{i32 7, !"frame-pointer", i32 2}
+!96 = !{!"clang version 15.0.0 (git@github.com:linkeLi0421/llvm-project15-IRDumperPass.git 23ab625cb005cd08da083f9b643a7feed9af8abe)"}

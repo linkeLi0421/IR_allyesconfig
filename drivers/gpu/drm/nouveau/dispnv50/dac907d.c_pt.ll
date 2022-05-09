@@ -1,0 +1,339 @@
+; ModuleID = '/llk/IR_all_yes/drivers/gpu/drm/nouveau/dispnv50/dac907d.c_pt.bc'
+source_filename = "../drivers/gpu/drm/nouveau/dispnv50/dac907d.c"
+target datalayout = "E-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "armebv6k-unknown-linux-gnueabi"
+
+module asm ".syntax unified"
+
+%struct.nv50_outp_func = type { ptr, ptr }
+%struct.nv50_core = type { ptr, %struct.nv50_dmac, i8 }
+%struct.nv50_dmac = type { %struct.nv50_chan, %struct.nvif_push, ptr, ptr, %struct.nvif_object, %struct.nvif_object, %struct.mutex, i32, i32, i32 }
+%struct.nv50_chan = type { %struct.nvif_object, ptr }
+%struct.nvif_push = type { ptr, ptr, %struct.nvif_mem, ptr, ptr, ptr, ptr }
+%struct.nvif_mem = type { %struct.nvif_object, i8, i8, i64, i64 }
+%struct.nvif_object = type { ptr, ptr, ptr, i32, i32, ptr, %struct.anon }
+%struct.anon = type { ptr, i64 }
+%struct.mutex = type { %struct.atomic_t, %struct.raw_spinlock, %struct.optimistic_spin_queue, %struct.list_head, ptr, %struct.lockdep_map }
+%struct.atomic_t = type { i32 }
+%struct.raw_spinlock = type { %struct.arch_spinlock_t, i32, i32, ptr, %struct.lockdep_map }
+%struct.arch_spinlock_t = type { %union.anon }
+%union.anon = type { i32 }
+%struct.optimistic_spin_queue = type { %struct.atomic_t }
+%struct.list_head = type { ptr, ptr }
+%struct.lockdep_map = type { ptr, [2 x ptr], ptr, i8, i8, i8, i32, i32 }
+
+@dac907d = dso_local constant { %struct.nv50_outp_func, [24 x i8] } { %struct.nv50_outp_func { ptr @dac907d_ctrl, ptr null }, [24 x i8] zeroinitializer }, align 32
+@.str = internal constant { [43 x i8], [53 x i8] } { [43 x i8] c"drivers/gpu/drm/nouveau/dispnv50/dac907d.c\00", [53 x i8] zeroinitializer }, align 32
+@.str.1 = internal constant { [5 x i8], [27 x i8] } { [5 x i8] c"mthd\00", [27 x i8] zeroinitializer }, align 32
+@.str.3 = internal constant { [16 x i8], [16 x i8] } { [16 x i8] c"segment overrun\00", [16 x i8] zeroinitializer }, align 32
+@.str.4 = internal constant { [16 x i8], [16 x i8] } { [16 x i8] c"pushbuf overrun\00", [16 x i8] zeroinitializer }, align 32
+@.str.5 = internal constant { [50 x i8], [46 x i8] } { [50 x i8] c"[%s/%08x:%s] %08x: %08x mthd 0x%04x size %d - %s\0A\00", [46 x i8] zeroinitializer }, align 32
+@__func__.dac907d_ctrl = private unnamed_addr constant [13 x i8] c"dac907d_ctrl\00", align 1
+@.str.6 = internal constant { [54 x i8], [42 x i8] } { [54 x i8] c"[%s/%08x:%s] %08x: %08x-> NV907D_DAC_SET_CONTROL(or)\0A\00", [42 x i8] zeroinitializer }, align 32
+@___asan_gen_.7 = private unnamed_addr constant [8 x i8] c"dac907d\00", align 1
+@___asan_gen_.9 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.26, i32 43, i32 1 }
+@___asan_gen_.25 = private unnamed_addr constant [17 x i8] c"<string literal>\00", align 1
+@___asan_gen_.26 = private constant [46 x i8] c"../drivers/gpu/drm/nouveau/dispnv50/dac907d.c\00", align 1
+@___asan_gen_.27 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.26, i32 38, i32 2 }
+@llvm.compiler.used = appending global [7 x ptr] [ptr @dac907d, ptr @.str, ptr @.str.1, ptr @.str.3, ptr @.str.4, ptr @.str.5, ptr @.str.6], section "llvm.metadata"
+@0 = internal global [7 x { i32, i32, i32, i32, i32, i32, i32, i32 }] [{ i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @dac907d to i32), i32 8, i32 32, i32 ptrtoint (ptr @___asan_gen_.7 to i32), i32 ptrtoint (ptr @___asan_gen_.26 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.9 to i32), i32 0 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str to i32), i32 43, i32 96, i32 ptrtoint (ptr @___asan_gen_.25 to i32), i32 ptrtoint (ptr @___asan_gen_.26 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.27 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.1 to i32), i32 5, i32 32, i32 ptrtoint (ptr @___asan_gen_.25 to i32), i32 ptrtoint (ptr @___asan_gen_.26 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.27 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.3 to i32), i32 16, i32 32, i32 ptrtoint (ptr @___asan_gen_.25 to i32), i32 ptrtoint (ptr @___asan_gen_.26 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.27 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.4 to i32), i32 16, i32 32, i32 ptrtoint (ptr @___asan_gen_.25 to i32), i32 ptrtoint (ptr @___asan_gen_.26 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.27 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.5 to i32), i32 50, i32 96, i32 ptrtoint (ptr @___asan_gen_.25 to i32), i32 ptrtoint (ptr @___asan_gen_.26 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.27 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.6 to i32), i32 54, i32 96, i32 ptrtoint (ptr @___asan_gen_.25 to i32), i32 ptrtoint (ptr @___asan_gen_.26 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.27 to i32), i32 -1 }]
+@llvm.used = appending global [2 x ptr] [ptr @asan.module_ctor, ptr @asan.module_dtor], section "llvm.metadata"
+@llvm.global_ctors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_ctor, ptr null }]
+@llvm.global_dtors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_dtor, ptr null }]
+
+; Function Attrs: nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync)
+define internal i32 @dac907d_ctrl(ptr nocapture noundef readonly %core, i32 noundef %or, i32 noundef %ctrl, ptr nocapture noundef readnone %asyh) #0 align 64 {
+entry:
+  call void @__sanitizer_cov_trace_pc() #4
+  call void @llvm.arm.gnu.eabi.mcount()
+  %push1 = getelementptr inbounds %struct.nv50_core, ptr %core, i32 0, i32 1, i32 2
+  %0 = ptrtoint ptr %push1 to i32
+  call void @__asan_load4_noabort(i32 %0)
+  %1 = load ptr, ptr %push1, align 8
+  %cur.i = getelementptr inbounds %struct.nvif_push, ptr %1, i32 0, i32 4
+  %2 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %2)
+  %3 = load ptr, ptr %cur.i, align 4
+  %add.ptr.i = getelementptr i32, ptr %3, i32 2
+  %end.i = getelementptr inbounds %struct.nvif_push, ptr %1, i32 0, i32 6
+  %4 = ptrtoint ptr %end.i to i32
+  call void @__asan_load4_noabort(i32 %4)
+  %5 = load ptr, ptr %end.i, align 4
+  %cmp.not.i = icmp ult ptr %add.ptr.i, %5
+  br i1 %cmp.not.i, label %entry.do.body3_crit_edge, label %if.then.i
+
+entry.do.body3_crit_edge:                         ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #4
+  br label %do.body3
+
+if.then.i:                                        ; preds = %entry
+  %6 = ptrtoint ptr %1 to i32
+  call void @__asan_load4_noabort(i32 %6)
+  %7 = load ptr, ptr %1, align 8
+  %call.i = tail call i32 %7(ptr noundef %1, i32 noundef 2) #2
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %call.i)
+  %tobool.not.i = icmp eq i32 %call.i, 0
+  br i1 %tobool.not.i, label %if.then.i.do.body3_crit_edge, label %if.then.i.cleanup_crit_edge
+
+if.then.i.cleanup_crit_edge:                      ; preds = %if.then.i
+  call void @__sanitizer_cov_trace_pc() #4
+  br label %cleanup
+
+if.then.i.do.body3_crit_edge:                     ; preds = %if.then.i
+  call void @__sanitizer_cov_trace_pc() #4
+  br label %do.body3
+
+do.body3:                                         ; preds = %if.then.i.do.body3_crit_edge, %entry.do.body3_crit_edge
+  %8 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %8)
+  %9 = load ptr, ptr %cur.i, align 4
+  %add.ptr4.i = getelementptr i32, ptr %9, i32 2
+  %seg.i = getelementptr inbounds %struct.nvif_push, ptr %1, i32 0, i32 5
+  %10 = ptrtoint ptr %seg.i to i32
+  call void @__asan_store4_noabort(i32 %10)
+  store ptr %add.ptr4.i, ptr %seg.i, align 8
+  %mul = shl i32 %or, 5
+  %add = add i32 %mul, 384
+  call void @__sanitizer_cov_trace_const_cmp4(i32 4096, i32 %add)
+  %tobool4.not = icmp ult i32 %add, 4096
+  br i1 %tobool4.not, label %do.body3.if.end50_crit_edge, label %do.end, !prof !20
+
+do.body3.if.end50_crit_edge:                      ; preds = %do.body3
+  call void @__sanitizer_cov_trace_pc() #4
+  br label %if.end50
+
+do.end:                                           ; preds = %do.body3
+  call void @__sanitizer_cov_trace_pc() #4
+  tail call void (ptr, i32, i32, ptr, ...) @warn_slowpath_fmt(ptr noundef nonnull @.str, i32 noundef 38, i32 noundef 9, ptr noundef nonnull @.str.1) #2
+  br label %if.end50
+
+if.end50:                                         ; preds = %do.end, %do.body3.if.end50_crit_edge
+  %11 = and i32 %add, 4064
+  %12 = or i32 %11, 262144
+  %13 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %13)
+  %14 = load ptr, ptr %cur.i, align 4
+  %15 = ptrtoint ptr %seg.i to i32
+  call void @__asan_load4_noabort(i32 %15)
+  %16 = load ptr, ptr %seg.i, align 8
+  %cmp.not = icmp ult ptr %14, %16
+  br i1 %cmp.not, label %if.end50.if.end93_crit_edge, label %do.end87, !prof !20
+
+if.end50.if.end93_crit_edge:                      ; preds = %if.end50
+  call void @__sanitizer_cov_trace_pc() #4
+  br label %if.end93
+
+do.end87:                                         ; preds = %if.end50
+  call void @__sanitizer_cov_trace_pc() #4
+  tail call void (ptr, i32, i32, ptr, ...) @warn_slowpath_fmt(ptr noundef nonnull @.str, i32 noundef 38, i32 noundef 9, ptr noundef nonnull @.str.3) #2
+  br label %if.end93
+
+if.end93:                                         ; preds = %do.end87, %if.end50.if.end93_crit_edge
+  %17 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %17)
+  %18 = load ptr, ptr %cur.i, align 4
+  %19 = ptrtoint ptr %end.i to i32
+  call void @__asan_load4_noabort(i32 %19)
+  %20 = load ptr, ptr %end.i, align 4
+  %cmp106.not = icmp ult ptr %18, %20
+  br i1 %cmp106.not, label %if.end93.if.end131_crit_edge, label %do.end125, !prof !20
+
+if.end93.if.end131_crit_edge:                     ; preds = %if.end93
+  call void @__sanitizer_cov_trace_pc() #4
+  br label %if.end131
+
+do.end125:                                        ; preds = %if.end93
+  call void @__sanitizer_cov_trace_pc() #4
+  tail call void (ptr, i32, i32, ptr, ...) @warn_slowpath_fmt(ptr noundef nonnull @.str, i32 noundef 38, i32 noundef 9, ptr noundef nonnull @.str.4) #2
+  br label %if.end131
+
+if.end131:                                        ; preds = %do.end125, %if.end93.if.end131_crit_edge
+  %21 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %21)
+  %22 = load ptr, ptr %cur.i, align 4
+  %mem = getelementptr inbounds %struct.nvif_push, ptr %1, i32 0, i32 2
+  %map = getelementptr inbounds %struct.nvif_push, ptr %1, i32 0, i32 2, i32 0, i32 6
+  %23 = ptrtoint ptr %map to i32
+  call void @__asan_load4_noabort(i32 %23)
+  %24 = load ptr, ptr %map, align 8
+  %sub.ptr.lhs.cast = ptrtoint ptr %22 to i32
+  %sub.ptr.rhs.cast = ptrtoint ptr %24 to i32
+  %sub.ptr.sub = sub i32 %sub.ptr.lhs.cast, %sub.ptr.rhs.cast
+  %25 = ptrtoint ptr %mem to i32
+  call void @__asan_load4_noabort(i32 %25)
+  %26 = load ptr, ptr %mem, align 8
+  %27 = ptrtoint ptr %26 to i32
+  call void @__asan_load4_noabort(i32 %27)
+  %28 = load ptr, ptr %26, align 4
+  %29 = ptrtoint ptr %28 to i32
+  call void @__asan_load4_noabort(i32 %29)
+  %30 = load ptr, ptr %28, align 4
+  %client = getelementptr inbounds %struct.nvif_push, ptr %1, i32 0, i32 2, i32 0, i32 1
+  %31 = ptrtoint ptr %client to i32
+  call void @__asan_load4_noabort(i32 %31)
+  %32 = load ptr, ptr %client, align 4
+  %name = getelementptr inbounds %struct.nvif_object, ptr %32, i32 0, i32 2
+  %33 = ptrtoint ptr %name to i32
+  call void @__asan_load4_noabort(i32 %33)
+  %34 = load ptr, ptr %name, align 8
+  %handle = getelementptr inbounds %struct.nvif_push, ptr %1, i32 0, i32 2, i32 0, i32 3
+  %35 = ptrtoint ptr %handle to i32
+  call void @__asan_load4_noabort(i32 %35)
+  %36 = load i32, ptr %handle, align 4
+  %name148 = getelementptr inbounds %struct.nvif_push, ptr %1, i32 0, i32 2, i32 0, i32 2
+  %37 = ptrtoint ptr %name148 to i32
+  call void @__asan_load4_noabort(i32 %37)
+  %38 = load ptr, ptr %name148, align 8
+  tail call void (ptr, ptr, ...) %30(ptr noundef %mem, ptr noundef nonnull @.str.5, ptr noundef %34, i32 noundef %36, ptr noundef %38, i32 noundef %sub.ptr.sub, i32 noundef %12, i32 noundef %add, i32 noundef 1, ptr noundef nonnull @__func__.dac907d_ctrl) #2
+  %39 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %39)
+  %40 = load ptr, ptr %cur.i, align 4
+  %incdec.ptr = getelementptr i32, ptr %40, i32 1
+  store ptr %incdec.ptr, ptr %cur.i, align 4
+  %41 = ptrtoint ptr %40 to i32
+  call void @__asan_store4_noabort(i32 %41)
+  store i32 %12, ptr %40, align 4
+  %42 = load ptr, ptr %cur.i, align 4
+  %43 = ptrtoint ptr %seg.i to i32
+  call void @__asan_load4_noabort(i32 %43)
+  %44 = load ptr, ptr %seg.i, align 8
+  %cmp168.not = icmp ult ptr %42, %44
+  br i1 %cmp168.not, label %if.end131.if.end193_crit_edge, label %do.end187, !prof !20
+
+if.end131.if.end193_crit_edge:                    ; preds = %if.end131
+  call void @__sanitizer_cov_trace_pc() #4
+  br label %if.end193
+
+do.end187:                                        ; preds = %if.end131
+  call void @__sanitizer_cov_trace_pc() #4
+  tail call void (ptr, i32, i32, ptr, ...) @warn_slowpath_fmt(ptr noundef nonnull @.str, i32 noundef 38, i32 noundef 9, ptr noundef nonnull @.str.3) #2
+  br label %if.end193
+
+if.end193:                                        ; preds = %do.end187, %if.end131.if.end193_crit_edge
+  %45 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %45)
+  %46 = load ptr, ptr %cur.i, align 4
+  %47 = ptrtoint ptr %end.i to i32
+  call void @__asan_load4_noabort(i32 %47)
+  %48 = load ptr, ptr %end.i, align 4
+  %cmp207.not = icmp ult ptr %46, %48
+  br i1 %cmp207.not, label %if.end193.if.end232_crit_edge, label %do.end226, !prof !20
+
+if.end193.if.end232_crit_edge:                    ; preds = %if.end193
+  call void @__sanitizer_cov_trace_pc() #4
+  br label %if.end232
+
+do.end226:                                        ; preds = %if.end193
+  call void @__sanitizer_cov_trace_pc() #4
+  tail call void (ptr, i32, i32, ptr, ...) @warn_slowpath_fmt(ptr noundef nonnull @.str, i32 noundef 38, i32 noundef 9, ptr noundef nonnull @.str.4) #2
+  br label %if.end232
+
+if.end232:                                        ; preds = %do.end226, %if.end193.if.end232_crit_edge
+  %49 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %49)
+  %50 = load ptr, ptr %cur.i, align 4
+  %51 = ptrtoint ptr %map to i32
+  call void @__asan_load4_noabort(i32 %51)
+  %52 = load ptr, ptr %map, align 8
+  %sub.ptr.lhs.cast250 = ptrtoint ptr %50 to i32
+  %sub.ptr.rhs.cast251 = ptrtoint ptr %52 to i32
+  %sub.ptr.sub252 = sub i32 %sub.ptr.lhs.cast250, %sub.ptr.rhs.cast251
+  %53 = ptrtoint ptr %mem to i32
+  call void @__asan_load4_noabort(i32 %53)
+  %54 = load ptr, ptr %mem, align 8
+  %55 = ptrtoint ptr %54 to i32
+  call void @__asan_load4_noabort(i32 %55)
+  %56 = load ptr, ptr %54, align 4
+  %57 = ptrtoint ptr %56 to i32
+  call void @__asan_load4_noabort(i32 %57)
+  %58 = load ptr, ptr %56, align 4
+  %59 = ptrtoint ptr %client to i32
+  call void @__asan_load4_noabort(i32 %59)
+  %60 = load ptr, ptr %client, align 4
+  %name264 = getelementptr inbounds %struct.nvif_object, ptr %60, i32 0, i32 2
+  %61 = ptrtoint ptr %name264 to i32
+  call void @__asan_load4_noabort(i32 %61)
+  %62 = load ptr, ptr %name264, align 8
+  %63 = ptrtoint ptr %handle to i32
+  call void @__asan_load4_noabort(i32 %63)
+  %64 = load i32, ptr %handle, align 4
+  %65 = ptrtoint ptr %name148 to i32
+  call void @__asan_load4_noabort(i32 %65)
+  %66 = load ptr, ptr %name148, align 8
+  tail call void (ptr, ptr, ...) %58(ptr noundef %mem, ptr noundef nonnull @.str.6, ptr noundef %62, i32 noundef %64, ptr noundef %66, i32 noundef %sub.ptr.sub252, i32 noundef %ctrl) #2
+  %67 = ptrtoint ptr %cur.i to i32
+  call void @__asan_load4_noabort(i32 %67)
+  %68 = load ptr, ptr %cur.i, align 4
+  %incdec.ptr273 = getelementptr i32, ptr %68, i32 1
+  store ptr %incdec.ptr273, ptr %cur.i, align 4
+  %69 = ptrtoint ptr %68 to i32
+  call void @__asan_store4_noabort(i32 %69)
+  store i32 %ctrl, ptr %68, align 4
+  br label %cleanup
+
+cleanup:                                          ; preds = %if.end232, %if.then.i.cleanup_crit_edge
+  %retval.0 = phi i32 [ 0, %if.end232 ], [ %call.i, %if.then.i.cleanup_crit_edge ]
+  ret i32 %retval.0
+}
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @warn_slowpath_fmt(ptr noundef, i32 noundef, i32 noundef, ptr noundef, ...) local_unnamed_addr #1
+
+; Function Attrs: nounwind
+declare void @llvm.arm.gnu.eabi.mcount() #2
+
+declare void @__sanitizer_cov_trace_const_cmp4(i32 zeroext, i32 zeroext)
+
+declare void @__sanitizer_cov_trace_pc()
+
+declare void @__asan_load4_noabort(i32)
+
+declare void @__asan_store4_noabort(i32)
+
+declare void @__asan_register_globals(i32, i32)
+
+declare void @__asan_unregister_globals(i32, i32)
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_ctor() #3 {
+  call void @__asan_register_globals(i32 ptrtoint (ptr @0 to i32), i32 7)
+  ret void
+}
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_dtor() #3 {
+  call void @__asan_unregister_globals(i32 ptrtoint (ptr @0 to i32), i32 7)
+  ret void
+}
+
+attributes #0 = { nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync) "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" "warn-stack-size"="1024" }
+attributes #1 = { null_pointer_is_valid "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #2 = { nounwind }
+attributes #3 = { nounwind uwtable(sync) "frame-pointer"="all" }
+attributes #4 = { nomerge }
+
+!llvm.asan.globals = !{!0, !2, !4, !5, !6, !7, !8, !9, !10}
+!llvm.module.flags = !{!11, !12, !13, !14, !15, !16, !17, !18}
+!llvm.ident = !{!19}
+
+!0 = !{ptr @dac907d, !1, !"dac907d", i1 false, i1 false}
+!1 = !{!"../drivers/gpu/drm/nouveau/dispnv50/dac907d.c", i32 43, i32 1}
+!2 = !{ptr @.str, !3, !"<string literal>", i1 false, i1 false}
+!3 = !{!"../drivers/gpu/drm/nouveau/dispnv50/dac907d.c", i32 38, i32 2}
+!4 = !{ptr @.str.1, !3, !"<string literal>", i1 false, i1 false}
+!5 = distinct !{null, !3, !"<string literal>", i1 false, i1 false}
+!6 = !{ptr @.str.3, !3, !"<string literal>", i1 false, i1 false}
+!7 = !{ptr @.str.4, !3, !"<string literal>", i1 false, i1 false}
+!8 = !{ptr @.str.5, !3, !"<string literal>", i1 false, i1 false}
+!9 = !{ptr @__func__.dac907d_ctrl, !3, !"<string literal>", i1 false, i1 false}
+!10 = !{ptr @.str.6, !3, !"<string literal>", i1 false, i1 false}
+!11 = !{i32 1, !"wchar_size", i32 2}
+!12 = !{i32 1, !"min_enum_size", i32 4}
+!13 = !{i32 8, !"branch-target-enforcement", i32 0}
+!14 = !{i32 8, !"sign-return-address", i32 0}
+!15 = !{i32 8, !"sign-return-address-all", i32 0}
+!16 = !{i32 8, !"sign-return-address-with-bkey", i32 0}
+!17 = !{i32 7, !"uwtable", i32 1}
+!18 = !{i32 7, !"frame-pointer", i32 2}
+!19 = !{!"clang version 15.0.0 (git@github.com:linkeLi0421/llvm-project15-IRDumperPass.git 23ab625cb005cd08da083f9b643a7feed9af8abe)"}
+!20 = !{!"branch_weights", i32 2000, i32 1}

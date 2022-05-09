@@ -1,0 +1,631 @@
+; ModuleID = '/llk/IR_all_yes/net/netfilter/ipvs/ip_vs_twos.c_pt.bc'
+source_filename = "../net/netfilter/ipvs/ip_vs_twos.c"
+target datalayout = "E-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64"
+target triple = "armebv6k-unknown-linux-gnueabi"
+
+module asm ".syntax unified"
+
+%struct.ip_vs_scheduler = type { %struct.list_head, ptr, %struct.atomic_t, ptr, ptr, ptr, ptr, ptr, ptr, ptr }
+%struct.list_head = type { ptr, ptr }
+%struct.atomic_t = type { i32 }
+%struct.pi_entry = type { ptr, ptr, ptr, i32, ptr, ptr }
+%struct.ip_vs_service = type { %struct.hlist_node, %struct.hlist_node, %struct.atomic_t, i16, i16, %union.nf_inet_addr, i16, i32, i32, i32, i32, ptr, %struct.list_head, i32, %struct.ip_vs_stats, ptr, %struct.spinlock, ptr, ptr, i32, %struct.callback_head }
+%struct.hlist_node = type { ptr, ptr }
+%union.nf_inet_addr = type { [4 x i32] }
+%struct.ip_vs_stats = type { %struct.ip_vs_kstats, %struct.ip_vs_estimator, ptr, %struct.spinlock, %struct.ip_vs_kstats }
+%struct.ip_vs_estimator = type { %struct.list_head, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64 }
+%struct.ip_vs_kstats = type { i64, i64, i64, i64, i64, i64, i64, i64, i64, i64 }
+%struct.spinlock = type { %union.anon.0 }
+%union.anon.0 = type { %struct.raw_spinlock }
+%struct.raw_spinlock = type { %struct.arch_spinlock_t, i32, i32, ptr, %struct.lockdep_map }
+%struct.arch_spinlock_t = type { %union.anon.1 }
+%union.anon.1 = type { i32 }
+%struct.lockdep_map = type { ptr, [2 x ptr], ptr, i8, i8, i8, i32, i32 }
+%struct.callback_head = type { ptr, ptr }
+%struct.ip_vs_dest = type { %struct.list_head, %struct.hlist_node, i16, i16, %union.nf_inet_addr, i32, %struct.atomic_t, %struct.atomic_t, %struct.atomic_t, i16, i16, i16, %struct.refcount_struct, %struct.ip_vs_stats, i32, %struct.atomic_t, %struct.atomic_t, %struct.atomic_t, i32, i32, %struct.spinlock, ptr, ptr, i16, i16, %union.nf_inet_addr, i32, %struct.list_head, i8 }
+%struct.refcount_struct = type { %struct.atomic_t }
+
+@ip_vs_twos_scheduler = internal global { %struct.ip_vs_scheduler, [52 x i8] } { %struct.ip_vs_scheduler { %struct.list_head { ptr @ip_vs_twos_scheduler, ptr @ip_vs_twos_scheduler }, ptr @.str, %struct.atomic_t zeroinitializer, ptr null, ptr null, ptr null, ptr null, ptr null, ptr null, ptr @ip_vs_twos_schedule }, [52 x i8] zeroinitializer }, align 32
+@__initcall__kmod_ip_vs_twos__588_137_ip_vs_twos_init6 = internal global ptr @ip_vs_twos_init, section ".initcall6.init", align 4
+@__exitcall_ip_vs_twos_cleanup = internal global ptr @ip_vs_twos_cleanup, section ".exitcall.exit", align 4
+@__UNIQUE_ID_file589 = internal constant [46 x i8] c"ip_vs_twos.file=net/netfilter/ipvs/ip_vs_twos\00", section ".modinfo", align 1
+@__UNIQUE_ID_license590 = internal constant [23 x i8] c"ip_vs_twos.license=GPL\00", section ".modinfo", align 1
+@.str = internal constant { [5 x i8], [27 x i8] } { [5 x i8] c"twos\00", [27 x i8] zeroinitializer }, align 32
+@ip_vs_twos_schedule._entry = internal constant { %struct.pi_entry, [40 x i8] } { %struct.pi_entry { ptr @.str.1, ptr @.str.2, ptr @.str.3, i32 52, ptr null, ptr null }, [40 x i8] zeroinitializer }, align 32
+@.str.1 = internal constant { [29 x i8], [35 x i8] } { [29 x i8] c"\017IPVS: %s(): Scheduling...\0A\00", [35 x i8] zeroinitializer }, align 32
+@.str.2 = internal constant { [20 x i8], [44 x i8] } { [20 x i8] c"ip_vs_twos_schedule\00", [44 x i8] zeroinitializer }, align 32
+@.str.3 = internal constant { [32 x i8], [32 x i8] } { [32 x i8] c"net/netfilter/ipvs/ip_vs_twos.c\00", [32 x i8] zeroinitializer }, align 32
+@ip_vs_twos_schedule._entry_ptr = internal global ptr @ip_vs_twos_schedule._entry, section ".printk_index", align 4
+@ip_vs_twos_schedule.__warned = internal unnamed_addr global i1 false, section ".data.unlikely", align 1
+@.str.4 = internal constant { [42 x i8], [54 x i8] } { [42 x i8] c"RCU-list traversed in non-reader section!\00", [54 x i8] zeroinitializer }, align 32
+@.str.5 = internal constant { [25 x i8], [39 x i8] } { [25 x i8] c"no destination available\00", [39 x i8] zeroinitializer }, align 32
+@ip_vs_twos_schedule.__warned.6 = internal unnamed_addr global i1 false, section ".data.unlikely", align 1
+@ip_vs_twos_schedule._entry.7 = internal constant { %struct.pi_entry, [40 x i8] } { %struct.pi_entry { ptr @.str.8, ptr @.str.2, ptr @.str.3, i32 113, ptr null, ptr null }, [40 x i8] zeroinitializer }, align 32
+@.str.8 = internal constant { [57 x i8], [39 x i8] } { [57 x i8] c"\017IPVS: twos: server %s:%u conns %d refcnt %d weight %d\0A\00", [39 x i8] zeroinitializer }, align 32
+@ip_vs_twos_schedule._entry_ptr.9 = internal global ptr @ip_vs_twos_schedule._entry.7, section ".printk_index", align 4
+@.str.10 = internal constant { [8 x i8], [24 x i8] } { [8 x i8] c"[%pI6c]\00", [24 x i8] zeroinitializer }, align 32
+@.str.11 = internal constant { [5 x i8], [27 x i8] } { [5 x i8] c"%pI4\00", [27 x i8] zeroinitializer }, align 32
+@___asan_gen_.12 = private unnamed_addr constant [21 x i8] c"ip_vs_twos_scheduler\00", align 1
+@___asan_gen_.14 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.40, i32 118, i32 31 }
+@___asan_gen_.17 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.40, i32 119, i32 10 }
+@___asan_gen_.29 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.40, i32 52, i32 2 }
+@___asan_gen_.32 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.40, i32 55, i32 2 }
+@___asan_gen_.35 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.40, i32 66, i32 28 }
+@___asan_gen_.36 = private unnamed_addr constant [7 x i8] c"_entry\00", align 1
+@___asan_gen_.40 = private constant [35 x i8] c"../net/netfilter/ipvs/ip_vs_twos.c\00", align 1
+@___asan_gen_.41 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.40, i32 109, i32 2 }
+@___asan_gen_.44 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.46, i32 196, i32 46 }
+@___asan_gen_.45 = private unnamed_addr constant [17 x i8] c"<string literal>\00", align 1
+@___asan_gen_.46 = private unnamed_addr constant [23 x i8] c"../include/net/ip_vs.h\00", align 1
+@___asan_gen_.47 = private unnamed_addr constant { ptr, i32, i32 } { ptr @___asan_gen_.46, i32 200, i32 46 }
+@llvm.compiler.used = appending global [19 x ptr] [ptr @__UNIQUE_ID_file589, ptr @__UNIQUE_ID_license590, ptr @__exitcall_ip_vs_twos_cleanup, ptr @__initcall__kmod_ip_vs_twos__588_137_ip_vs_twos_init6, ptr @ip_vs_twos_cleanup, ptr @ip_vs_twos_schedule._entry, ptr @ip_vs_twos_schedule._entry.7, ptr @ip_vs_twos_schedule._entry_ptr, ptr @ip_vs_twos_schedule._entry_ptr.9, ptr @ip_vs_twos_scheduler, ptr @.str, ptr @.str.1, ptr @.str.2, ptr @.str.3, ptr @.str.4, ptr @.str.5, ptr @.str.8, ptr @.str.10, ptr @.str.11], section "llvm.metadata"
+@0 = internal global [12 x { i32, i32, i32, i32, i32, i32, i32, i32 }] [{ i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @ip_vs_twos_scheduler to i32), i32 44, i32 96, i32 ptrtoint (ptr @___asan_gen_.12 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.14 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str to i32), i32 5, i32 32, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.17 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @ip_vs_twos_schedule._entry to i32), i32 24, i32 64, i32 ptrtoint (ptr @___asan_gen_.36 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.29 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.1 to i32), i32 29, i32 64, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.29 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.2 to i32), i32 20, i32 64, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.29 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.3 to i32), i32 32, i32 64, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.29 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.4 to i32), i32 42, i32 96, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.32 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.5 to i32), i32 25, i32 64, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.35 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @ip_vs_twos_schedule._entry.7 to i32), i32 24, i32 64, i32 ptrtoint (ptr @___asan_gen_.36 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.41 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.8 to i32), i32 57, i32 96, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.41 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.10 to i32), i32 8, i32 32, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.44 to i32), i32 -1 }, { i32, i32, i32, i32, i32, i32, i32, i32 } { i32 ptrtoint (ptr @.str.11 to i32), i32 5, i32 32, i32 ptrtoint (ptr @___asan_gen_.45 to i32), i32 ptrtoint (ptr @___asan_gen_.40 to i32), i32 0, i32 ptrtoint (ptr @___asan_gen_.47 to i32), i32 -1 }]
+@llvm.used = appending global [2 x ptr] [ptr @asan.module_ctor, ptr @asan.module_dtor], section "llvm.metadata"
+@llvm.global_ctors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_ctor, ptr null }]
+@llvm.global_dtors = appending global [1 x { i32, ptr, ptr }] [{ i32, ptr, ptr } { i32 1, ptr @asan.module_dtor, ptr null }]
+
+; Function Attrs: cold nounwind null_pointer_is_valid optsize sanitize_address sspstrong uwtable(sync)
+define internal void @ip_vs_twos_cleanup() #0 section ".exit.text" align 64 {
+entry:
+  call void @__sanitizer_cov_trace_pc() #9
+  %call = tail call i32 @unregister_ip_vs_scheduler(ptr noundef nonnull @ip_vs_twos_scheduler) #7
+  tail call void @synchronize_rcu() #7
+  ret void
+}
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @unregister_ip_vs_scheduler(ptr noundef) local_unnamed_addr #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @synchronize_rcu() local_unnamed_addr #1
+
+; Function Attrs: cold nounwind null_pointer_is_valid optsize sanitize_address sspstrong uwtable(sync)
+define internal i32 @ip_vs_twos_init() #0 section ".init.text" align 64 {
+entry:
+  call void @__sanitizer_cov_trace_pc() #9
+  call void @llvm.arm.gnu.eabi.mcount()
+  %call = tail call i32 @register_ip_vs_scheduler(ptr noundef nonnull @ip_vs_twos_scheduler) #7
+  ret i32 %call
+}
+
+; Function Attrs: nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync)
+define internal ptr @ip_vs_twos_schedule(ptr noundef %svc, ptr nocapture noundef readnone %skb, ptr nocapture noundef readnone %iph) #2 align 64 {
+entry:
+  %ip_vs_dbg_buf = alloca [160 x i8], align 1
+  call void @__sanitizer_cov_trace_pc() #9
+  call void @llvm.arm.gnu.eabi.mcount()
+  %call = tail call i32 @ip_vs_get_debug_level() #7
+  call void @__sanitizer_cov_trace_const_cmp4(i32 5, i32 %call)
+  %cmp = icmp sgt i32 %call, 5
+  br i1 %cmp, label %do.end, label %entry.do.body5_crit_edge
+
+entry.do.body5_crit_edge:                         ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %do.body5
+
+do.end:                                           ; preds = %entry
+  call void @__sanitizer_cov_trace_pc() #9
+  %call2 = tail call i32 (ptr, ...) @_printk(ptr noundef nonnull @.str.1, ptr noundef nonnull @.str.2) #10
+  br label %do.body5
+
+do.body5:                                         ; preds = %do.end, %entry.do.body5_crit_edge
+  %call6 = tail call i32 @rcu_read_lock_any_held() #7
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %call6)
+  %tobool.not = icmp eq i32 %call6, 0
+  br i1 %tobool.not, label %land.lhs.true, label %do.body5.do.end14_crit_edge
+
+do.body5.do.end14_crit_edge:                      ; preds = %do.body5
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %do.end14
+
+land.lhs.true:                                    ; preds = %do.body5
+  %call7 = tail call i32 @debug_lockdep_rcu_enabled() #7
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %call7)
+  %tobool8.not = icmp eq i32 %call7, 0
+  br i1 %tobool8.not, label %land.lhs.true.do.end14_crit_edge, label %land.lhs.true9
+
+land.lhs.true.do.end14_crit_edge:                 ; preds = %land.lhs.true
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %do.end14
+
+land.lhs.true9:                                   ; preds = %land.lhs.true
+  %.b186 = load i1, ptr @ip_vs_twos_schedule.__warned, align 1
+  br i1 %.b186, label %land.lhs.true9.do.end14_crit_edge, label %if.then11
+
+land.lhs.true9.do.end14_crit_edge:                ; preds = %land.lhs.true9
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %do.end14
+
+if.then11:                                        ; preds = %land.lhs.true9
+  call void @__sanitizer_cov_trace_pc() #9
+  store i1 true, ptr @ip_vs_twos_schedule.__warned, align 1
+  tail call void @lockdep_rcu_suspicious(ptr noundef nonnull @.str.3, i32 noundef 55, ptr noundef nonnull @.str.4) #7
+  br label %do.end14
+
+do.end14:                                         ; preds = %if.then11, %land.lhs.true9.do.end14_crit_edge, %land.lhs.true.do.end14_crit_edge, %do.body5.do.end14_crit_edge
+  %destinations = getelementptr inbounds %struct.ip_vs_service, ptr %svc, i32 0, i32 12
+  %0 = ptrtoint ptr %destinations to i32
+  call void @__asan_load4_noabort(i32 %0)
+  %dest.0201 = load volatile ptr, ptr %destinations, align 8
+  %cmp21.not202 = icmp eq ptr %dest.0201, %destinations
+  br i1 %cmp21.not202, label %do.end14.if.then40_crit_edge, label %do.end14.for.body_crit_edge
+
+do.end14.for.body_crit_edge:                      ; preds = %do.end14
+  br label %for.body
+
+do.end14.if.then40_crit_edge:                     ; preds = %do.end14
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %if.then40
+
+for.body:                                         ; preds = %for.inc.for.body_crit_edge, %do.end14.for.body_crit_edge
+  %dest.0205 = phi ptr [ %dest.0, %for.inc.for.body_crit_edge ], [ %dest.0201, %do.end14.for.body_crit_edge ]
+  %choice1.0204 = phi ptr [ %choice1.1, %for.inc.for.body_crit_edge ], [ null, %do.end14.for.body_crit_edge ]
+  %total_weight.0203 = phi i32 [ %total_weight.1, %for.inc.for.body_crit_edge ], [ 0, %do.end14.for.body_crit_edge ]
+  %flags = getelementptr inbounds %struct.ip_vs_dest, ptr %dest.0205, i32 0, i32 5
+  %1 = ptrtoint ptr %flags to i32
+  call void @__asan_load4_noabort(i32 %1)
+  %2 = load volatile i32, ptr %flags, align 4
+  %and = and i32 %2, 2
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %and)
+  %tobool22.not = icmp eq i32 %and, 0
+  br i1 %tobool22.not, label %if.then23, label %for.body.for.inc_crit_edge
+
+for.body.for.inc_crit_edge:                       ; preds = %for.body
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %for.inc
+
+if.then23:                                        ; preds = %for.body
+  call void @__sanitizer_cov_trace_pc() #9
+  %weight24 = getelementptr inbounds %struct.ip_vs_dest, ptr %dest.0205, i32 0, i32 7
+  %call.i.i = tail call zeroext i1 @__kasan_check_read(ptr noundef %weight24, i32 noundef 4) #7
+  %3 = ptrtoint ptr %weight24 to i32
+  call void @__asan_load4_noabort(i32 %3)
+  %4 = load volatile i32, ptr %weight24, align 4
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %4)
+  %cmp26 = icmp sgt i32 %4, 0
+  %5 = tail call i32 @llvm.smax.i32(i32 %4, i32 0)
+  %spec.select = add i32 %5, %total_weight.0203
+  %spec.select187 = select i1 %cmp26, ptr %dest.0205, ptr %choice1.0204
+  br label %for.inc
+
+for.inc:                                          ; preds = %if.then23, %for.body.for.inc_crit_edge
+  %total_weight.1 = phi i32 [ %total_weight.0203, %for.body.for.inc_crit_edge ], [ %spec.select, %if.then23 ]
+  %choice1.1 = phi ptr [ %choice1.0204, %for.body.for.inc_crit_edge ], [ %spec.select187, %if.then23 ]
+  %6 = ptrtoint ptr %dest.0205 to i32
+  call void @__asan_load4_noabort(i32 %6)
+  %dest.0 = load volatile ptr, ptr %dest.0205, align 8
+  %cmp21.not = icmp eq ptr %dest.0, %destinations
+  br i1 %cmp21.not, label %for.end, label %for.inc.for.body_crit_edge
+
+for.inc.for.body_crit_edge:                       ; preds = %for.inc
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %for.body
+
+for.end:                                          ; preds = %for.inc
+  %tobool39.not = icmp eq ptr %choice1.1, null
+  br i1 %tobool39.not, label %for.end.if.then40_crit_edge, label %if.end41
+
+for.end.if.then40_crit_edge:                      ; preds = %for.end
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %if.then40
+
+if.then40:                                        ; preds = %for.end.if.then40_crit_edge, %do.end14.if.then40_crit_edge
+  tail call void @ip_vs_scheduler_err(ptr noundef %svc, ptr noundef nonnull @.str.5) #7
+  br label %cleanup
+
+if.end41:                                         ; preds = %for.end
+  %add42 = add i32 %total_weight.1, 1
+  %call43 = tail call i32 @prandom_u32() #7
+  %rem = urem i32 %call43, %add42
+  %call44 = tail call i32 @prandom_u32() #7
+  %rem45 = urem i32 %call44, %add42
+  %call47 = tail call i32 @rcu_read_lock_any_held() #7
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %call47)
+  %tobool48.not = icmp eq i32 %call47, 0
+  br i1 %tobool48.not, label %land.lhs.true49, label %if.end41.do.end57_crit_edge
+
+if.end41.do.end57_crit_edge:                      ; preds = %if.end41
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %do.end57
+
+land.lhs.true49:                                  ; preds = %if.end41
+  %call50 = tail call i32 @debug_lockdep_rcu_enabled() #7
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %call50)
+  %tobool51.not = icmp eq i32 %call50, 0
+  br i1 %tobool51.not, label %land.lhs.true49.do.end57_crit_edge, label %land.lhs.true52
+
+land.lhs.true49.do.end57_crit_edge:               ; preds = %land.lhs.true49
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %do.end57
+
+land.lhs.true52:                                  ; preds = %land.lhs.true49
+  %.b184185 = load i1, ptr @ip_vs_twos_schedule.__warned.6, align 1
+  br i1 %.b184185, label %land.lhs.true52.do.end57_crit_edge, label %if.then54
+
+land.lhs.true52.do.end57_crit_edge:               ; preds = %land.lhs.true52
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %do.end57
+
+if.then54:                                        ; preds = %land.lhs.true52
+  call void @__sanitizer_cov_trace_pc() #9
+  store i1 true, ptr @ip_vs_twos_schedule.__warned.6, align 1
+  tail call void @lockdep_rcu_suspicious(ptr noundef nonnull @.str.3, i32 noundef 78, ptr noundef nonnull @.str.4) #7
+  br label %do.end57
+
+do.end57:                                         ; preds = %if.then54, %land.lhs.true52.do.end57_crit_edge, %land.lhs.true49.do.end57_crit_edge, %if.end41.do.end57_crit_edge
+  %7 = ptrtoint ptr %destinations to i32
+  call void @__asan_load4_noabort(i32 %7)
+  %dest.1207 = load volatile ptr, ptr %destinations, align 8
+  %cmp70.not208 = icmp eq ptr %dest.1207, %destinations
+  br i1 %cmp70.not208, label %do.end57.nextstage_crit_edge, label %do.end57.for.body71_crit_edge
+
+do.end57.for.body71_crit_edge:                    ; preds = %do.end57
+  br label %for.body71
+
+do.end57.nextstage_crit_edge:                     ; preds = %do.end57
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %nextstage
+
+for.body71:                                       ; preds = %for.inc100.for.body71_crit_edge, %do.end57.for.body71_crit_edge
+  %dest.1217 = phi ptr [ %dest.1, %for.inc100.for.body71_crit_edge ], [ %dest.1207, %do.end57.for.body71_crit_edge ]
+  %choice1.2216 = phi ptr [ %choice1.4, %for.inc100.for.body71_crit_edge ], [ %choice1.1, %do.end57.for.body71_crit_edge ]
+  %choice2.0215 = phi ptr [ %choice2.2, %for.inc100.for.body71_crit_edge ], [ null, %do.end57.for.body71_crit_edge ]
+  %rweight1.0214 = phi i32 [ %rweight1.1, %for.inc100.for.body71_crit_edge ], [ %rem, %do.end57.for.body71_crit_edge ]
+  %rweight2.0213 = phi i32 [ %rweight2.1, %for.inc100.for.body71_crit_edge ], [ %rem45, %do.end57.for.body71_crit_edge ]
+  %weight1.0212 = phi i32 [ %weight1.2, %for.inc100.for.body71_crit_edge ], [ -1, %do.end57.for.body71_crit_edge ]
+  %weight2.0211 = phi i32 [ %weight2.2, %for.inc100.for.body71_crit_edge ], [ -1, %do.end57.for.body71_crit_edge ]
+  %overhead1.0210 = phi i32 [ %overhead1.2, %for.inc100.for.body71_crit_edge ], [ 0, %do.end57.for.body71_crit_edge ]
+  %overhead2.0209 = phi i32 [ %overhead2.2, %for.inc100.for.body71_crit_edge ], [ -1, %do.end57.for.body71_crit_edge ]
+  %flags72 = getelementptr inbounds %struct.ip_vs_dest, ptr %dest.1217, i32 0, i32 5
+  %8 = ptrtoint ptr %flags72 to i32
+  call void @__asan_load4_noabort(i32 %8)
+  %9 = load volatile i32, ptr %flags72, align 4
+  %and73 = and i32 %9, 2
+  call void @__sanitizer_cov_trace_const_cmp4(i32 0, i32 %and73)
+  %tobool74.not = icmp eq i32 %and73, 0
+  br i1 %tobool74.not, label %if.end76, label %for.body71.for.inc100_crit_edge
+
+for.body71.for.inc100_crit_edge:                  ; preds = %for.body71
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %for.inc100
+
+if.end76:                                         ; preds = %for.body71
+  %weight77 = getelementptr inbounds %struct.ip_vs_dest, ptr %dest.1217, i32 0, i32 7
+  %call.i.i190 = tail call zeroext i1 @__kasan_check_read(ptr noundef %weight77, i32 noundef 4) #7
+  %10 = ptrtoint ptr %weight77 to i32
+  call void @__asan_load4_noabort(i32 %10)
+  %11 = load volatile i32, ptr %weight77, align 4
+  call void @__sanitizer_cov_trace_const_cmp4(i32 1, i32 %11)
+  %cmp79 = icmp slt i32 %11, 1
+  br i1 %cmp79, label %if.end76.for.inc100_crit_edge, label %if.end81
+
+if.end76.for.inc100_crit_edge:                    ; preds = %if.end76
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %for.inc100
+
+if.end81:                                         ; preds = %if.end76
+  %sub = sub i32 %rweight1.0214, %11
+  %sub82 = sub i32 %rweight2.0213, %11
+  call void @__sanitizer_cov_trace_const_cmp4(i32 1, i32 %sub)
+  %cmp83 = icmp slt i32 %sub, 1
+  call void @__sanitizer_cov_trace_const_cmp4(i32 -1, i32 %weight1.0212)
+  %cmp85 = icmp eq i32 %weight1.0212, -1
+  %or.cond = select i1 %cmp83, i1 %cmp85, i1 false
+  br i1 %or.cond, label %if.then86, label %if.end81.if.end88_crit_edge
+
+if.end81.if.end88_crit_edge:                      ; preds = %if.end81
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %if.end88
+
+if.then86:                                        ; preds = %if.end81
+  call void @__sanitizer_cov_trace_pc() #9
+  %activeconns.i = getelementptr inbounds %struct.ip_vs_dest, ptr %dest.1217, i32 0, i32 15
+  %call.i.i.i = tail call zeroext i1 @__kasan_check_read(ptr noundef %activeconns.i, i32 noundef 4) #7
+  %12 = ptrtoint ptr %activeconns.i to i32
+  call void @__asan_load4_noabort(i32 %12)
+  %13 = load volatile i32, ptr %activeconns.i, align 4
+  %shl.i = shl i32 %13, 8
+  %inactconns.i = getelementptr inbounds %struct.ip_vs_dest, ptr %dest.1217, i32 0, i32 16
+  %call.i.i3.i = tail call zeroext i1 @__kasan_check_read(ptr noundef %inactconns.i, i32 noundef 4) #7
+  %14 = ptrtoint ptr %inactconns.i to i32
+  call void @__asan_load4_noabort(i32 %14)
+  %15 = load volatile i32, ptr %inactconns.i, align 4
+  %add.i = add i32 %15, %shl.i
+  br label %if.end88
+
+if.end88:                                         ; preds = %if.then86, %if.end81.if.end88_crit_edge
+  %overhead1.1 = phi i32 [ %add.i, %if.then86 ], [ %overhead1.0210, %if.end81.if.end88_crit_edge ]
+  %weight1.1 = phi i32 [ %11, %if.then86 ], [ %weight1.0212, %if.end81.if.end88_crit_edge ]
+  %choice1.3 = phi ptr [ %dest.1217, %if.then86 ], [ %choice1.2216, %if.end81.if.end88_crit_edge ]
+  call void @__sanitizer_cov_trace_const_cmp4(i32 1, i32 %sub82)
+  %cmp89 = icmp slt i32 %sub82, 1
+  call void @__sanitizer_cov_trace_const_cmp4(i32 -1, i32 %weight2.0211)
+  %cmp91 = icmp eq i32 %weight2.0211, -1
+  %or.cond188 = select i1 %cmp89, i1 %cmp91, i1 false
+  br i1 %or.cond188, label %if.then92, label %if.end88.if.end94_crit_edge
+
+if.end88.if.end94_crit_edge:                      ; preds = %if.end88
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %if.end94
+
+if.then92:                                        ; preds = %if.end88
+  call void @__sanitizer_cov_trace_pc() #9
+  %activeconns.i193 = getelementptr inbounds %struct.ip_vs_dest, ptr %dest.1217, i32 0, i32 15
+  %call.i.i.i194 = tail call zeroext i1 @__kasan_check_read(ptr noundef %activeconns.i193, i32 noundef 4) #7
+  %16 = ptrtoint ptr %activeconns.i193 to i32
+  call void @__asan_load4_noabort(i32 %16)
+  %17 = load volatile i32, ptr %activeconns.i193, align 4
+  %shl.i195 = shl i32 %17, 8
+  %inactconns.i196 = getelementptr inbounds %struct.ip_vs_dest, ptr %dest.1217, i32 0, i32 16
+  %call.i.i3.i197 = tail call zeroext i1 @__kasan_check_read(ptr noundef %inactconns.i196, i32 noundef 4) #7
+  %18 = ptrtoint ptr %inactconns.i196 to i32
+  call void @__asan_load4_noabort(i32 %18)
+  %19 = load volatile i32, ptr %inactconns.i196, align 4
+  %add.i198 = add i32 %19, %shl.i195
+  br label %if.end94
+
+if.end94:                                         ; preds = %if.then92, %if.end88.if.end94_crit_edge
+  %overhead2.1 = phi i32 [ %add.i198, %if.then92 ], [ %overhead2.0209, %if.end88.if.end94_crit_edge ]
+  %weight2.1 = phi i32 [ %11, %if.then92 ], [ %weight2.0211, %if.end88.if.end94_crit_edge ]
+  %choice2.1 = phi ptr [ %dest.1217, %if.then92 ], [ %choice2.0215, %if.end88.if.end94_crit_edge ]
+  call void @__sanitizer_cov_trace_const_cmp4(i32 -1, i32 %weight1.1)
+  %cmp95.not = icmp eq i32 %weight1.1, -1
+  br i1 %cmp95.not, label %if.end94.for.inc100_crit_edge, label %land.lhs.true96
+
+if.end94.for.inc100_crit_edge:                    ; preds = %if.end94
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %for.inc100
+
+land.lhs.true96:                                  ; preds = %if.end94
+  call void @__sanitizer_cov_trace_const_cmp4(i32 -1, i32 %weight2.1)
+  %cmp97.not = icmp eq i32 %weight2.1, -1
+  br i1 %cmp97.not, label %land.lhs.true96.for.inc100_crit_edge, label %land.lhs.true96.nextstage.loopexit_crit_edge
+
+land.lhs.true96.nextstage.loopexit_crit_edge:     ; preds = %land.lhs.true96
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %nextstage.loopexit
+
+land.lhs.true96.for.inc100_crit_edge:             ; preds = %land.lhs.true96
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %for.inc100
+
+for.inc100:                                       ; preds = %land.lhs.true96.for.inc100_crit_edge, %if.end94.for.inc100_crit_edge, %if.end76.for.inc100_crit_edge, %for.body71.for.inc100_crit_edge
+  %overhead2.2 = phi i32 [ %overhead2.0209, %for.body71.for.inc100_crit_edge ], [ %overhead2.0209, %if.end76.for.inc100_crit_edge ], [ %overhead2.1, %land.lhs.true96.for.inc100_crit_edge ], [ %overhead2.1, %if.end94.for.inc100_crit_edge ]
+  %overhead1.2 = phi i32 [ %overhead1.0210, %for.body71.for.inc100_crit_edge ], [ %overhead1.0210, %if.end76.for.inc100_crit_edge ], [ %overhead1.1, %land.lhs.true96.for.inc100_crit_edge ], [ %overhead1.1, %if.end94.for.inc100_crit_edge ]
+  %weight2.2 = phi i32 [ %weight2.0211, %for.body71.for.inc100_crit_edge ], [ %weight2.0211, %if.end76.for.inc100_crit_edge ], [ -1, %land.lhs.true96.for.inc100_crit_edge ], [ %weight2.1, %if.end94.for.inc100_crit_edge ]
+  %weight1.2 = phi i32 [ %weight1.0212, %for.body71.for.inc100_crit_edge ], [ %weight1.0212, %if.end76.for.inc100_crit_edge ], [ %weight1.1, %land.lhs.true96.for.inc100_crit_edge ], [ -1, %if.end94.for.inc100_crit_edge ]
+  %rweight2.1 = phi i32 [ %rweight2.0213, %for.body71.for.inc100_crit_edge ], [ %rweight2.0213, %if.end76.for.inc100_crit_edge ], [ %sub82, %land.lhs.true96.for.inc100_crit_edge ], [ %sub82, %if.end94.for.inc100_crit_edge ]
+  %rweight1.1 = phi i32 [ %rweight1.0214, %for.body71.for.inc100_crit_edge ], [ %rweight1.0214, %if.end76.for.inc100_crit_edge ], [ %sub, %land.lhs.true96.for.inc100_crit_edge ], [ %sub, %if.end94.for.inc100_crit_edge ]
+  %choice2.2 = phi ptr [ %choice2.0215, %for.body71.for.inc100_crit_edge ], [ %choice2.0215, %if.end76.for.inc100_crit_edge ], [ %choice2.1, %land.lhs.true96.for.inc100_crit_edge ], [ %choice2.1, %if.end94.for.inc100_crit_edge ]
+  %choice1.4 = phi ptr [ %choice1.2216, %for.body71.for.inc100_crit_edge ], [ %choice1.2216, %if.end76.for.inc100_crit_edge ], [ %choice1.3, %land.lhs.true96.for.inc100_crit_edge ], [ %choice1.3, %if.end94.for.inc100_crit_edge ]
+  %20 = ptrtoint ptr %dest.1217 to i32
+  call void @__asan_load4_noabort(i32 %20)
+  %dest.1 = load volatile ptr, ptr %dest.1217, align 8
+  %cmp70.not = icmp eq ptr %dest.1, %destinations
+  br i1 %cmp70.not, label %for.inc100.nextstage.loopexit_crit_edge, label %for.inc100.for.body71_crit_edge
+
+for.inc100.for.body71_crit_edge:                  ; preds = %for.inc100
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %for.body71
+
+for.inc100.nextstage.loopexit_crit_edge:          ; preds = %for.inc100
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %nextstage.loopexit
+
+nextstage.loopexit:                               ; preds = %for.inc100.nextstage.loopexit_crit_edge, %land.lhs.true96.nextstage.loopexit_crit_edge
+  %overhead2.3.ph = phi i32 [ %overhead2.1, %land.lhs.true96.nextstage.loopexit_crit_edge ], [ %overhead2.2, %for.inc100.nextstage.loopexit_crit_edge ]
+  %overhead1.3.ph = phi i32 [ %overhead1.1, %land.lhs.true96.nextstage.loopexit_crit_edge ], [ %overhead1.2, %for.inc100.nextstage.loopexit_crit_edge ]
+  %weight2.3.ph = phi i32 [ %weight2.1, %land.lhs.true96.nextstage.loopexit_crit_edge ], [ %weight2.2, %for.inc100.nextstage.loopexit_crit_edge ]
+  %weight1.3.ph = phi i32 [ %weight1.1, %land.lhs.true96.nextstage.loopexit_crit_edge ], [ %weight1.2, %for.inc100.nextstage.loopexit_crit_edge ]
+  %choice2.3.ph = phi ptr [ %choice2.1, %land.lhs.true96.nextstage.loopexit_crit_edge ], [ %choice2.2, %for.inc100.nextstage.loopexit_crit_edge ]
+  %choice1.5.ph = phi ptr [ %choice1.3, %land.lhs.true96.nextstage.loopexit_crit_edge ], [ %choice1.4, %for.inc100.nextstage.loopexit_crit_edge ]
+  %21 = mul i32 %weight2.3.ph, %overhead1.3.ph
+  %22 = mul i32 %weight1.3.ph, %overhead2.3.ph
+  br label %nextstage
+
+nextstage:                                        ; preds = %nextstage.loopexit, %do.end57.nextstage_crit_edge
+  %choice2.3 = phi ptr [ null, %do.end57.nextstage_crit_edge ], [ %choice2.3.ph, %nextstage.loopexit ]
+  %choice1.5 = phi ptr [ %choice1.1, %do.end57.nextstage_crit_edge ], [ %choice1.5.ph, %nextstage.loopexit ]
+  %mul = phi i32 [ 0, %do.end57.nextstage_crit_edge ], [ %21, %nextstage.loopexit ]
+  %mul113 = phi i32 [ 1, %do.end57.nextstage_crit_edge ], [ %22, %nextstage.loopexit ]
+  %tobool111.not = icmp eq ptr %choice2.3, null
+  call void @__sanitizer_cov_trace_cmp4(i32 %mul, i32 %mul113)
+  %cmp114 = icmp sgt i32 %mul, %mul113
+  %spec.select189 = select i1 %cmp114, ptr %choice2.3, ptr %choice1.5
+  %choice1.6 = select i1 %tobool111.not, ptr %choice1.5, ptr %spec.select189
+  call void @llvm.lifetime.start.p0(i64 160, ptr nonnull %ip_vs_dbg_buf) #7
+  %23 = call ptr @memset(ptr %ip_vs_dbg_buf, i32 255, i32 160)
+  %call118 = tail call i32 @ip_vs_get_debug_level() #7
+  call void @__sanitizer_cov_trace_const_cmp4(i32 5, i32 %call118)
+  %cmp119 = icmp sgt i32 %call118, 5
+  br i1 %cmp119, label %do.end123, label %nextstage.if.end132_crit_edge
+
+nextstage.if.end132_crit_edge:                    ; preds = %nextstage
+  call void @__sanitizer_cov_trace_pc() #9
+  br label %if.end132
+
+do.end123:                                        ; preds = %nextstage
+  %af = getelementptr inbounds %struct.ip_vs_dest, ptr %choice1.6, i32 0, i32 2
+  %24 = ptrtoint ptr %af to i32
+  call void @__asan_load2_noabort(i32 %24)
+  %25 = load i16, ptr %af, align 8
+  %addr = getelementptr inbounds %struct.ip_vs_dest, ptr %choice1.6, i32 0, i32 4
+  call void @__sanitizer_cov_trace_const_cmp2(i16 10, i16 %25)
+  %cmp.i = icmp eq i16 %25, 10
+  %.str.10..str.11.i = select i1 %cmp.i, ptr @.str.10, ptr @.str.11
+  %call3.i = call i32 (ptr, i32, ptr, ...) @snprintf(ptr noundef nonnull %ip_vs_dbg_buf, i32 noundef 160, ptr noundef nonnull %.str.10..str.11.i, ptr noundef %addr) #7
+  %26 = add i32 %call3.i, -161
+  call void @__sanitizer_cov_trace_const_cmp4(i32 -162, i32 %26)
+  %cmp7.i = icmp ult i32 %26, -162
+  br i1 %cmp7.i, label %do.body10.i, label %ip_vs_dbg_addr.exit, !prof !41
+
+do.body10.i:                                      ; preds = %do.end123
+  call void @__sanitizer_cov_trace_pc() #9
+  tail call void asm sideeffect "1:\09.long ( (((0xe7f001f2) << 24) & 0xFF000000) | (((0xe7f001f2) << 8) & 0x00FF0000) | (((0xe7f001f2) >> 8) & 0x0000FF00) | (((0xe7f001f2) >> 24) & 0x000000FF) )\0A\09\0A.pushsection .rodata.str, \22aMS\22, %progbits, 1\0A2:\09.asciz \22include/net/ip_vs.h\22\0A.popsection\0A.pushsection __bug_table,\22aw\22\0A.align 2\0A3:\09.word 1b, 2b\0A\09.hword 204, 0\0A.popsection", ""() #7, !srcloc !42
+  unreachable
+
+ip_vs_dbg_addr.exit:                              ; preds = %do.end123
+  call void @__sanitizer_cov_trace_pc() #9
+  %port = getelementptr inbounds %struct.ip_vs_dest, ptr %choice1.6, i32 0, i32 3
+  %27 = ptrtoint ptr %port to i32
+  call void @__asan_load2_noabort(i32 %27)
+  %28 = load i16, ptr %port, align 2
+  %conv126 = zext i16 %28 to i32
+  %activeconns = getelementptr inbounds %struct.ip_vs_dest, ptr %choice1.6, i32 0, i32 15
+  %call.i.i191 = tail call zeroext i1 @__kasan_check_read(ptr noundef %activeconns, i32 noundef 4) #7
+  %29 = ptrtoint ptr %activeconns to i32
+  call void @__asan_load4_noabort(i32 %29)
+  %30 = load volatile i32, ptr %activeconns, align 4
+  %refcnt = getelementptr inbounds %struct.ip_vs_dest, ptr %choice1.6, i32 0, i32 12
+  %call.i.i.i199 = tail call zeroext i1 @__kasan_check_read(ptr noundef %refcnt, i32 noundef 4) #7
+  %31 = ptrtoint ptr %refcnt to i32
+  call void @__asan_load4_noabort(i32 %31)
+  %32 = load volatile i32, ptr %refcnt, align 4
+  %weight129 = getelementptr inbounds %struct.ip_vs_dest, ptr %choice1.6, i32 0, i32 7
+  %call.i.i192 = tail call zeroext i1 @__kasan_check_read(ptr noundef %weight129, i32 noundef 4) #7
+  %33 = ptrtoint ptr %weight129 to i32
+  call void @__asan_load4_noabort(i32 %33)
+  %34 = load volatile i32, ptr %weight129, align 4
+  %call131 = call i32 (ptr, ...) @_printk(ptr noundef nonnull @.str.8, ptr noundef nonnull %ip_vs_dbg_buf, i32 noundef %conv126, i32 noundef %30, i32 noundef %32, i32 noundef %34) #10
+  br label %if.end132
+
+if.end132:                                        ; preds = %ip_vs_dbg_addr.exit, %nextstage.if.end132_crit_edge
+  call void @llvm.lifetime.end.p0(i64 160, ptr nonnull %ip_vs_dbg_buf) #7
+  br label %cleanup
+
+cleanup:                                          ; preds = %if.end132, %if.then40
+  %retval.0 = phi ptr [ %choice1.6, %if.end132 ], [ null, %if.then40 ]
+  ret ptr %retval.0
+}
+
+; Function Attrs: argmemonly nocallback nofree nosync nounwind willreturn
+declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #3
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @ip_vs_get_debug_level() local_unnamed_addr #1
+
+; Function Attrs: cold null_pointer_is_valid
+declare dso_local i32 @_printk(ptr noundef, ...) local_unnamed_addr #4
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @rcu_read_lock_any_held() local_unnamed_addr #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @debug_lockdep_rcu_enabled() local_unnamed_addr #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @lockdep_rcu_suspicious(ptr noundef, i32 noundef, ptr noundef) local_unnamed_addr #1
+
+; Function Attrs: argmemonly nocallback nofree nosync nounwind willreturn
+declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #3
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local void @ip_vs_scheduler_err(ptr noundef, ptr noundef) local_unnamed_addr #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @prandom_u32() local_unnamed_addr #1
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local zeroext i1 @__kasan_check_read(ptr noundef, i32 noundef) local_unnamed_addr #1
+
+; Function Attrs: nofree nounwind null_pointer_is_valid
+declare dso_local noundef i32 @snprintf(ptr noalias nocapture noundef writeonly, i32 noundef, ptr nocapture noundef readonly, ...) local_unnamed_addr #5
+
+; Function Attrs: null_pointer_is_valid
+declare dso_local i32 @register_ip_vs_scheduler(ptr noundef) local_unnamed_addr #1
+
+; Function Attrs: nocallback nofree nosync nounwind readnone speculatable willreturn
+declare i32 @llvm.smax.i32(i32, i32) #6
+
+; Function Attrs: nounwind
+declare void @llvm.arm.gnu.eabi.mcount() #7
+
+declare void @__sanitizer_cov_trace_cmp4(i32 zeroext, i32 zeroext)
+
+declare void @__sanitizer_cov_trace_const_cmp2(i16 zeroext, i16 zeroext)
+
+declare void @__sanitizer_cov_trace_const_cmp4(i32 zeroext, i32 zeroext)
+
+declare void @__sanitizer_cov_trace_pc()
+
+declare void @__asan_load2_noabort(i32)
+
+declare void @__asan_load4_noabort(i32)
+
+declare ptr @memset(ptr, i32, i32)
+
+declare void @__asan_register_globals(i32, i32)
+
+declare void @__asan_unregister_globals(i32, i32)
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_ctor() #8 {
+  call void @__asan_register_globals(i32 ptrtoint (ptr @0 to i32), i32 12)
+  ret void
+}
+
+; Function Attrs: nounwind uwtable(sync)
+define internal void @asan.module_dtor() #8 {
+  call void @__asan_unregister_globals(i32 ptrtoint (ptr @0 to i32), i32 12)
+  ret void
+}
+
+attributes #0 = { cold nounwind null_pointer_is_valid optsize sanitize_address sspstrong uwtable(sync) "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" "warn-stack-size"="1024" }
+attributes #1 = { null_pointer_is_valid "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #2 = { nounwind null_pointer_is_valid sanitize_address sspstrong uwtable(sync) "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" "warn-stack-size"="1024" }
+attributes #3 = { argmemonly nocallback nofree nosync nounwind willreturn }
+attributes #4 = { cold null_pointer_is_valid "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #5 = { nofree nounwind null_pointer_is_valid "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="mpcore" "target-features"="+armv6k,+dsp,+soft-float,+strict-align,-aes,-bf16,-d32,-dotprod,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-mve,-mve.fp,-neon,-sha2,-thumb-mode,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #6 = { nocallback nofree nosync nounwind readnone speculatable willreturn }
+attributes #7 = { nounwind }
+attributes #8 = { nounwind uwtable(sync) "frame-pointer"="all" }
+attributes #9 = { nomerge }
+attributes #10 = { cold nounwind }
+
+!llvm.asan.globals = !{!0, !2, !4, !6, !7, !9, !11, !13, !14, !15, !16, !17, !19, !20, !22, !24, !26, !27, !28, !30}
+!llvm.module.flags = !{!32, !33, !34, !35, !36, !37, !38, !39}
+!llvm.ident = !{!40}
+
+!0 = !{ptr @__initcall__kmod_ip_vs_twos__588_137_ip_vs_twos_init6, !1, !"__initcall__kmod_ip_vs_twos__588_137_ip_vs_twos_init6", i1 false, i1 false}
+!1 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 137, i32 1}
+!2 = !{ptr @__exitcall_ip_vs_twos_cleanup, !3, !"__exitcall_ip_vs_twos_cleanup", i1 false, i1 false}
+!3 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 138, i32 1}
+!4 = !{ptr @__UNIQUE_ID_file589, !5, !"__UNIQUE_ID_file589", i1 false, i1 false}
+!5 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 139, i32 1}
+!6 = !{ptr @__UNIQUE_ID_license590, !5, !"__UNIQUE_ID_license590", i1 false, i1 false}
+!7 = !{ptr @.str, !8, !"<string literal>", i1 false, i1 false}
+!8 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 119, i32 10}
+!9 = !{ptr @ip_vs_twos_scheduler, !10, !"ip_vs_twos_scheduler", i1 false, i1 false}
+!10 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 118, i32 31}
+!11 = !{ptr @.str.1, !12, !"<string literal>", i1 false, i1 false}
+!12 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 52, i32 2}
+!13 = !{ptr @.str.2, !12, !"<string literal>", i1 false, i1 false}
+!14 = !{ptr @.str.3, !12, !"<string literal>", i1 false, i1 false}
+!15 = !{ptr @ip_vs_twos_schedule._entry, !12, !"_entry", i1 false, i1 false}
+!16 = !{ptr @ip_vs_twos_schedule._entry_ptr, !12, !"_entry_ptr", i1 false, i1 false}
+!17 = distinct !{null, !18, !"__warned", i1 false, i1 false}
+!18 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 55, i32 2}
+!19 = !{ptr @.str.4, !18, !"<string literal>", i1 false, i1 false}
+!20 = !{ptr @.str.5, !21, !"<string literal>", i1 false, i1 false}
+!21 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 66, i32 28}
+!22 = distinct !{null, !23, !"__warned", i1 false, i1 false}
+!23 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 78, i32 2}
+!24 = !{ptr @.str.8, !25, !"<string literal>", i1 false, i1 false}
+!25 = !{!"../net/netfilter/ipvs/ip_vs_twos.c", i32 109, i32 2}
+!26 = !{ptr @ip_vs_twos_schedule._entry.7, !25, !"_entry", i1 false, i1 false}
+!27 = !{ptr @ip_vs_twos_schedule._entry_ptr.9, !25, !"_entry_ptr", i1 false, i1 false}
+!28 = !{ptr @.str.10, !29, !"<string literal>", i1 false, i1 false}
+!29 = !{!"../include/net/ip_vs.h", i32 196, i32 46}
+!30 = !{ptr @.str.11, !31, !"<string literal>", i1 false, i1 false}
+!31 = !{!"../include/net/ip_vs.h", i32 200, i32 46}
+!32 = !{i32 1, !"wchar_size", i32 2}
+!33 = !{i32 1, !"min_enum_size", i32 4}
+!34 = !{i32 8, !"branch-target-enforcement", i32 0}
+!35 = !{i32 8, !"sign-return-address", i32 0}
+!36 = !{i32 8, !"sign-return-address-all", i32 0}
+!37 = !{i32 8, !"sign-return-address-with-bkey", i32 0}
+!38 = !{i32 7, !"uwtable", i32 1}
+!39 = !{i32 7, !"frame-pointer", i32 2}
+!40 = !{!"clang version 15.0.0 (git@github.com:linkeLi0421/llvm-project15-IRDumperPass.git 23ab625cb005cd08da083f9b643a7feed9af8abe)"}
+!41 = !{!"branch_weights", i32 1, i32 2000}
+!42 = !{i64 2158032845, i64 2158033329, i64 2158032882, i64 2158032938, i64 2158032972, i64 2158032996, i64 2158033037, i64 2158033058, i64 2158033086, i64 2158033120}
